@@ -63,6 +63,7 @@ export class AffectationTeacherComponent implements OnInit {
         matiereId: this.selectedMatiere,
         classeId: this.selectedClasse
       };
+      //dazdjazdazdazjdzoazd
     
       this.matiereService.affecterProfesseur(data).subscribe(
         (res) => {
