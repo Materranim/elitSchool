@@ -1,0 +1,77 @@
+ 
+        <div class="content-body">
+            <div class="container-fluid">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>Bienvenue !</h4>
+                            <span class="ml-1">Matières</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row">
+                    <div class="container">
+                        <h1>Matières </h1>
+        
+                        <div class="level">
+                            <div class="level-title">7ème Année </div>
+                            <div class="subjects-container">
+                                <div class="subject-card" *ngFor="let m of matiereNiveau1">
+                                    <div class="subject-name">{{ m.name }} <span class="coefficient">(Coef. {{ m.coefficient }})</span></div>
+                                    <div class="subject-details">  {{ m.heures }}H</div>
+                                    <div class="subject-details"> Description: {{ m.desc }}</div>
+                                    <button class="btn btn-primary mr-2" (click)="navigateTo(m._id)" >Modifier</button> 
+                                    <button class="btn btn-delete" (click)="deletMatiere(m._id)" >Supprimer</button>
+
+
+                                </div>
+                            </div> 
+                        </div>
+        
+                        <div class="level">
+                            <div class="level-title">8ème Année </div>
+                            <div class="subjects-container">
+                                <div class="subject-card" *ngFor="let m of matiereNiveau2">
+                                    <div class="subject-name">{{ m.name }} <span class="coefficient">(Coef. {{ m.coefficient }})</span></div>
+                                    <div class="subject-details">  {{ m.heures }}H</div>
+                                    <div class="subject-details"> Description: {{ m.desc }}</div>                                   
+                                     <button class="btn btn-primary mr-2" (click)="navigateTo(m._id)" >Modifier</button>
+                                    <button class="btn btn-delete" (click)="deletMatiere(m._id)" >Supprimer</button>
+
+
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="level">
+                            <div class="level-title">9ème Année </div>
+                            <div class="subjects-container">
+                                <div class="subject-card" *ngFor="let m of matiereNiveau3">
+                                    <div class="subject-name">{{ m.name }} <span class="coefficient">(Coef. {{ m.coefficient }})</span></div>
+                                    <div class="subject-details">  {{ m.heures }}H</div>
+                                    <div class="subject-details"> Description: {{ m.desc }}</div>                                    
+                                    <button class="btn btn-primary mr-2" (click)="navigateTo(m._id)" >Modifier</button>
+                                    <button class="btn btn-delete" (click)="deletMatiere(m._id)" >Supprimer</button>
+
+
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="navigation">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+
+     
+          
+
+
+
+
+
+        

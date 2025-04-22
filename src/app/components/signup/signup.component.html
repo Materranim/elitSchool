@@ -1,0 +1,548 @@
+
+        <!-- <div class="content-body">
+            <div class="container-fluid">
+				
+				
+				
+				<div class="row">
+					<div class="col-xl-12 col-xxl-12 col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+							</div>
+							<div class="card-body">
+								
+                                <form method="post"  [formGroup]="signupForm">   
+									<input type="hidden" formControlName="role">
+									<div *ngIf="selectedRole">
+										<h2>Inscription - {{ selectedRole | titlecase }}</h2>
+								</div>	
+
+
+
+									<div class="row">
+										
+										
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<div class="form-group">
+												
+												<label class="form-label">First Name</label>
+												<input type="text"  formControlName="firstName"  class="form-control" placeholder="First Name ">
+												<div class="text-danger" *ngIf="signupForm.controls['firstName'].invalid && 
+												(signupForm.controls['firstName'].dirty || signupForm.controls['firstName'].touched)">
+													<div *ngIf="signupForm.controls['firstName'].errors?.['minlength']">
+														First Name min length 5
+													</div>
+													<div *ngIf="signupForm.controls['firstName'].errors?.['required']">
+														First Name est obligatoire
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="form-label">Last Name</label>
+												<input type="text" formControlName="lastName" class="form-control"placeholder="Last Name">
+												<div class="text-danger" *ngIf="signupForm.controls['lastName'].invalid && 
+                            (signupForm.controls['lastName'].dirty || signupForm.controls['lastName'].touched)">
+                                <div *ngIf="signupForm.controls['lastName'].errors?.['maxlength']">
+                                    Last Name max length 7
+                                </div>
+                                <div *ngIf="signupForm.controls['lastName'].errors?.['required']">
+                                    Last Name est obligatoire
+                                </div>
+                            </div>
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="form-label">Email</label>
+												<input type="text" formControlName="email" class="form-control" placeholder="Email ">
+												<div class="text-danger" *ngIf="signupForm.controls['email'].invalid && 
+												(signupForm.controls['email'].dirty || signupForm.controls['email'].touched)">
+													<div *ngIf="signupForm.controls['email'].errors?.['email']">
+														Form Email invalid
+													</div>
+													<div *ngIf="signupForm.controls['email'].errors?.['required']">
+														Email est obligatoire
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										
+										
+										
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="form-label">Mobile Number</label>
+												<input type="text"  formControlName="phone" class="form-control"placeholder="Mobile Number ">
+												<div class="text-danger" *ngIf="signupForm.controls['phone'].invalid && 
+                            (signupForm.controls['phone'].dirty || signupForm.controls['phone'].touched)">
+                                <div *ngIf="signupForm.controls['phone'].errors?.['pattern']">
+                                    mobileNumber invalid
+                                </div>
+                                <div *ngIf="signupForm.controls['phone'].errors?.['required']">
+                                    mobileNumber est obligatoire
+                                </div>
+                            </div>
+											</div>
+										</div>
+										
+									
+										
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="form-label">Password </label>
+												<input type="text" formControlName="password" class="form-control" placeholder=" Password">
+												<div class="text-danger" *ngIf="signupForm.controls['password'].invalid && 
+                            (signupForm.controls['password'].dirty || signupForm.controls['password'].touched)">
+                                <div *ngIf="signupForm.controls['password'].errors?.['pattern']">
+                                    Password n'est pas fort
+                                </div>
+                                <div *ngIf="signupForm.controls['password'].errors?.['required']">
+                                    Password est obligatoire
+                                </div>
+                            </div>
+											</div>
+										</div>
+										
+
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="form-label">Confirme Password </label>
+												<input type="text"  formControlName="cPassword" class="form-control" placeholder="Confirm Password">
+												<div class="text-danger" *ngIf="signupForm.controls['cPassword'].invalid && 
+                            (signupForm.controls['cPassword'].dirty || signupForm.controls['cPassword'].touched)">
+                                <div *ngIf="signupForm.controls['cPassword'].errors?.['mustMatch']">
+                                    Invalid Confirm Password
+                                </div>
+								
+                            </div>
+											</div>
+										</div>
+										
+
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<div class="form-group">
+												<label class="form-label">Adresse </label>
+												<input type="text"formControlName="adresse" class="form-control" placeholder="Adresse ">
+												<div class="text-danger" *ngIf="signupForm.controls['adresse'].invalid && 
+                            (signupForm.controls['adresse'].dirty || signupForm.controls['adresse'].touched)">
+                                <div *ngIf="signupForm.controls['adresse'].errors?.['required']">
+                                    Adresse est obligatoire
+                                </div>
+                            </div>
+											</div>
+										</div>
+									
+										
+															<div  class="col-lg-6 col-md-6 col-sm-12">
+																<div class="form-group" *ngIf="selectedRole === 'parent'">
+																	<label class="form-label">phone Enfant</label>
+																		<input type="text"  formControlName="phoneEnfant" class="form-control"placeholder="phone Enfant ">
+																			<div class="text-danger" *ngIf="signupForm.controls['phoneEnfant'].invalid && 
+																				(signupForm.controls['phoneEnfant'].dirty || signupForm.controls['phoneEnfant'].touched)">
+																				<div *ngIf="signupForm.controls['phoneEnfant'].errors?.['pattern']">
+																					phoneEnfant invalid
+																			</div>
+																			<div *ngIf="signupForm.controls['phoneEnfant'].errors?.['required']">
+																				phoneEnfant est obligatoire
+																			</div>
+																	</div>
+																	</div>
+															</div>
+
+
+														
+														
+
+															<div class="col-lg-6 col-md-6 col-sm-12">
+																<div class="form-group" *ngIf="selectedRole === 'student'">
+																	<label class="form-label">Class</label>
+																	<select class="form-control" formControlName="classe">
+																		<option value="" disabled selected>Sélectionner une classe</option>
+																		<option value="7eme">7éme année</option>
+																		<option value="8eme">8éme année</option>
+																		<option value="9eme">9éme année</option>
+																	</select>
+																	<div class="text-danger" *ngIf="signupForm.controls['classe'].invalid && 
+																	(signupForm.controls['classe'].dirty || signupForm.controls['classe'].touched)">
+																		<div *ngIf="signupForm.controls['classe'].errors?.['required']">
+																			classe est obligatoire
+																		</div>
+																	</div>
+																</div>
+															</div>
+															
+						<div class="col-lg-6 col-md-6 col-sm-12">
+							<div class="form-group" *ngIf="selectedRole === 'teacher'" >
+								<label class="form-label">Specialite </label>
+								<input type="text"formControlName="specialite" class="form-control" placeholder="specialite ">
+								<div class="text-danger" *ngIf="signupForm.controls['specialite'].invalid && 
+			(signupForm.controls['specialite'].dirty || signupForm.controls['specialite'].touched)">
+				<div *ngIf="signupForm.controls['specialite'].errors?.['required']">
+					specialite est obligatoire
+				</div>
+			</div>
+							</div>
+						</div>
+
+						
+
+		
+						 <div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="button-group">
+								<button type="button" *ngIf="selectedRole === 'teacher'" (click)='cvfilePicker.click()' class="btn btn-primary">
+									Sélectionner CV
+								</button>
+								
+								<button type="button" *ngIf="selectedRole === 'student'" (click)='photofilePicker.click()' class="btn btn-primary">
+									Sélectionner Image
+								</button> 
+						
+								 <button type="button" (click)="signup()" class="btn btn-primary">Submit</button> 
+							 </div>
+						
+							<div class="form-group">
+								<input style="visibility: hidden;" type="file" class="form-control"
+								#cvfilePicker (change)='onImageSelected($event )' formControlName="cv" />
+							</div>
+						
+							<div class="form-group">
+								<input style="visibility: hidden;" type="file" class="form-control"
+								#photofilePicker (change)='onImageSelected($event)' formControlName="photoProfil" />
+							</div>
+						
+							<img [src]="filePreview">
+						</div> 
+						
+									</div>
+								
+								</form>
+                        </div>
+                    </div>
+				</div>
+                
+            </div>
+        </div> -->
+       
+
+
+<!-- 
+		<div class="col-lg-12 col-md-12 col-sm-12">
+			<button type="button" *ngIf="selectedRole === 'teacher'" (click)='filePicker.click()' class="btn btn-primary">
+				Sélectionner cv</button>
+				
+				<div class="form-group" >
+				<input style="visibility: hidden;" type="file" class="form-control"
+				#filePicker (change)='onImageSelected($event )' formControlName="cv" />
+				</div>
+				<img [src]="filePreview">
+		
+			<button type="button" *ngIf="selectedRole === 'student'" (click)='filePicker.click()' class="btn btn-primary">
+			Sélectionner Image</button>
+			
+			<div class="form-group">
+			<input style="visibility: hidden;" type="file" class="form-control"
+			#filePicker (change)='onImageSelected($event)' formControlName="photoProfil" />
+			</div>
+			<img [src]="filePreview">
+					<button type="button"  (click)="signup()" class="btn btn-primary">Submit</button>
+				</div>
+			</div> -->
+
+
+
+ 
+
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <!-- <img src="/assets/images/logoElite.jpg" alt="Logo Collège Elite"> -->
+                <div class="logo-text">
+                    <h1>Collège Elite</h1>
+                    <span>Excellence Éducative</span>
+                </div>
+            </div>
+
+            <div class="auth-links">
+				<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+                <a href="/"><i class="fas fa-home"></i> Accueil</a>
+                <a href="/login-role"><i class="fas fa-user"></i> Connexion</a>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Inscription au Collège Elite</h1>
+        <p>Rejoignez notre communauté éducative d'excellence</p>
+    </section>
+    
+    <!-- Formulaire d'inscription -->
+    <section class="signup-section">
+        <div class="signup-card">
+            <div class="signup-image"></div>
+            <div class="signup-form">
+                <h2><i class="fas fa-user-plus"></i> Créer un compte</h2>
+                
+                <form [formGroup]="signupForm">
+					<input type="hidden" formControlName="role">
+                            <div *ngIf="selectedRole">
+                                <!-- <h2>Inscription - {{ selectedRole | titlecase }}</h2> -->
+                        </div>
+                                                  <!-- Champs communs -->
+
+                    <div class="form-group">
+                        <label class="form-label">Nom</label>
+                        <input type="text" class="form-control"  formControlName="firstName" name="firstName" placeholder="Votre nom">
+						<div class="text-danger" *ngIf="signupForm.controls['firstName'].invalid && 
+                        (signupForm.controls['firstName'].dirty || signupForm.controls['firstName'].touched)">
+                        <div *ngIf="signupForm.controls['firstName'].errors?.['minlength']">
+                             First Name min length 5
+                        </div>
+                        <div *ngIf="signupForm.controls['firstName'].errors?.['required']">
+                             First Name est obligatoire
+                         </div>
+                </div>
+                    </div>
+                    
+
+
+
+
+
+                    <div class="form-group">
+                        <label class="form-label">Prénom</label>
+                        <input type="text" class="form-control"  formControlName="lastName" name="lastName" placeholder="Votre prénom">
+						<div class="text-danger" *ngIf="signupForm.controls['lastName'].invalid && 
+						(signupForm.controls['lastName'].dirty || signupForm.controls['lastName'].touched)">
+							<div *ngIf="signupForm.controls['lastName'].errors?.['maxlength']">
+								Last Name max length 7
+							</div>
+							<div *ngIf="signupForm.controls['lastName'].errors?.['required']">
+								Last Name est obligatoire
+							</div>
+						</div>
+                    </div>
+                    
+
+
+
+
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" formControlName="email" name="email" placeholder="Votre email">
+						<div class="text-danger" *ngIf="signupForm.controls['email'].invalid && 
+                                        (signupForm.controls['email'].dirty || signupForm.controls['email'].touched)">
+                                            <div *ngIf="signupForm.controls['email'].errors?.['email']">
+                                                Form Email invalid
+                                            </div>
+                                            <div *ngIf="signupForm.controls['email'].errors?.['required']">
+                                                Email est obligatoire
+                                            </div>
+                                        </div>
+                    </div>
+                    
+
+
+
+
+
+                    <div class="form-group">
+                        <label class="form-label">Téléphone</label>
+                        <input type="number" class="form-control"  formControlName="phone" name="phone" placeholder="Votre numéro">
+						<div class="text-danger" *ngIf="signupForm.controls['phone'].invalid && 
+						(signupForm.controls['phone'].dirty || signupForm.controls['phone'].touched)">
+							<div *ngIf="signupForm.controls['phone'].errors?.['pattern']">
+								mobileNumber invalid
+							</div>
+							<div *ngIf="signupForm.controls['phone'].errors?.['required']">
+								mobileNumber est obligatoire
+							</div>
+						</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" formControlName="password" name="password" placeholder="Votre mot de passe">
+						<div class="text-danger" *ngIf="signupForm.controls['password'].invalid && 
+						(signupForm.controls['password'].dirty || signupForm.controls['password'].touched)">
+							<div *ngIf="signupForm.controls['password'].errors?.['pattern']">
+								Password n'est pas fort
+							</div>
+							<div *ngIf="signupForm.controls['password'].errors?.['required']">
+								Password est obligatoire
+							</div>
+						</div>
+                    </div>
+
+
+
+
+                    
+                    <div class="form-group">
+                        <label class="form-label">Confirmer le mot de passe</label>
+                        <input type="password" class="form-control"  formControlName="cPassword" name="cPassword" placeholder="Confirmez votre mot de passe">
+						<div class="text-danger" *ngIf="signupForm.controls['cPassword'].invalid && 
+						(signupForm.controls['cPassword'].dirty || signupForm.controls['cPassword'].touched)">
+							<div *ngIf="signupForm.controls['cPassword'].errors?.['mustMatch']">
+								Invalid Confirm Password
+							</div>
+							<div *ngIf="signupForm.controls['cPassword'].errors?.['required']">
+								cPassword est obligatoire
+							</div>
+						</div>
+							   
+                    </div>
+
+
+
+                    
+                    <div class="form-group">
+                        <label class="form-label">Adresse</label>
+                        <input type="text" class="form-control" formControlName="adresse" name="adresse" placeholder="Votre adresse">
+						<div class="text-danger" *ngIf="signupForm.controls['adresse'].invalid && 
+						(signupForm.controls['adresse'].dirty || signupForm.controls['adresse'].touched)">
+							<div *ngIf="signupForm.controls['adresse'].errors?.['required']">
+								Adresse est obligatoire
+							</div>
+						</div>
+                    </div>
+                    
+                    <!-- Champs spécifiques aux student -->
+                    <div class="form-group" id="classe-field">
+						<div class="form-group" *ngIf="selectedRole === 'student'">
+
+                        <label class="form-label">Classe</label>
+                        <select class="form-control" name="classe" formControlName="classe">
+                            <option value="" disabled selected>Sélectionnez votre classe</option>
+                            <option value="7eme">7ème année</option>
+                            <option value="8eme">8ème année</option>
+                            <option value="9eme">9ème année</option>
+                        </select>
+						<div class="text-danger" *ngIf="signupForm.controls['classe'].invalid && 
+                                                            (signupForm.controls['classe'].dirty || signupForm.controls['classe'].touched)">
+                                                                <div *ngIf="signupForm.controls['classe'].errors?.['required']">
+                                                                    classe est obligatoire
+                                                                </div>
+                                                            </div>
+                    </div>
+				</div>
+
+				                <!-- Champs spécifiques aux Teachers -->
+
+                    <div class="form-group" id="specialite-field">
+						<div class="form-group" *ngIf="selectedRole === 'teacher'" >
+
+                        <label class="form-label">Spécialité</label>
+                        <input type="text" class="form-control" formControlName="specialite"  name="specialite" placeholder="Votre spécialité">
+						<div class="text-danger" *ngIf="signupForm.controls['specialite'].invalid && 
+						(signupForm.controls['specialite'].dirty || signupForm.controls['specialite'].touched)">
+							<div *ngIf="signupForm.controls['specialite'].errors?.['required']">
+								specialite est obligatoire
+							</div>
+						</div>
+                    </div>
+				</div>
+			  <!-- Champs spécifiques aux Parents -->
+
+                    <div class="form-group" id="phoneEnfant-field">
+						<div class="form-group" *ngIf="selectedRole === 'parent'">
+
+                        <label class="form-label">Téléphone de l'enfant</label>
+                        <input type="number" class="form-control"  formControlName="phoneEnfant" name="phoneEnfant" placeholder="Téléphone de l'enfant">
+						<div class="text-danger" *ngIf="signupForm.controls['phoneEnfant'].invalid && 
+						(signupForm.controls['phoneEnfant'].dirty || signupForm.controls['phoneEnfant'].touched)">
+						<div *ngIf="signupForm.controls['phoneEnfant'].errors?.['pattern']">
+							phoneEnfant invalid
+					</div>
+					<div *ngIf="signupForm.controls['phoneEnfant'].errors?.['required']">
+						phoneEnfant est obligatoire
+					</div>
+			</div>
+                    </div>
+				</div>
+                    
+                   
+<!--  -->
+<div class="col-lg-12 col-md-12 col-sm-12">
+	<div class="button-group">
+		<button type="button" *ngIf="selectedRole === 'teacher'" (click)='cvfilePicker.click()' class="btn btn-primary">
+			Sélectionner CV
+		</button>
+		
+		<button type="button" *ngIf="selectedRole === 'student'" (click)='photofilePicker.click()' class="btn btn-primary">
+			Sélectionner Image
+		</button> 
+
+	 </div>
+
+	<div class="form-group">
+		<input style="visibility: hidden;" type="file" class="form-control"
+		#cvfilePicker (change)='onImageSelected($event )' formControlName="cv" />
+	</div>
+
+	<div class="form-group">
+		<input style="visibility: hidden;" type="file" class="form-control"
+		#photofilePicker (change)='onImageSelected($event)' formControlName="photoProfil" />
+	</div>
+
+	<img [src]="filePreview">
+</div> 
+					<!--  -->
+
+                    <button type="submit" (click)="signup()" class="btn-submit">S'inscrire <i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+	<footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Collège Privé Elite</h3>
+                    <p>Établissement d'enseignement privé agréé par le Ministère de l'Éducation tunisien, spécialisé dans les classes de 7ème, 8ème et 9ème années.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens Utiles</h3>
+                    <ul>
+                        <li><a href="#">Admissions</a></li>
+                        <li><a href="#">Frais de scolarité</a></li>
+                        <li><a href="#">Transport scolaire</a></li>
+                        <li><a href="#">Restauration</a></li>
+                        <li><a href="#">Règlement intérieur</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Niveaux Scolaires</h3>
+                    <ul>
+                        <li><a href="#">7ème Année</a></li>
+                        <li><a href="#">8ème Année</a></li>
+                        <li><a href="#">9ème Année</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Coordonnées</h3>
+                    <div class="contact-info">
+                        <div><i class="fas fa-map-marker-alt"></i> Rue de l'Éducation, Cité El Khadra, Tunis</div>
+                        <div><i class="fas fa-phone"></i> +216 71 123 456</div>
+                        <div><i class="fas fa-envelope"></i> contact@collegeelite.tn</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Collège Privé Elite. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+ 

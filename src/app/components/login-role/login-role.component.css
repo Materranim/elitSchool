@@ -1,0 +1,336 @@
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Couleurs principales */
+:root {
+    --primary: #6673fd;
+    --secondary: #1367c8;
+    --light: #f8f9fa;
+    --dark: #343a40;
+}
+
+/* Header */
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.logo span {
+    color: #f0f0f0;
+    font-size: 16px;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.auth-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.auth-links a:first-child {
+    margin-left: 0;
+}
+
+.auth-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hero Section */
+.login-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.login-hero-content h1 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.login-hero-content p {
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Section avec espacement */
+.role-selection-section {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.role-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+    margin: 0 auto;
+}
+
+.role-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.role-header h2 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.role-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Cartes de rôle verticales */
+.role-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.role-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--dark);
+    transition: all 0.3s ease;
+    border: 1px solid #eaeaea;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.role-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary);
+}
+
+.role-icon {
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.role-card:hover .role-icon {
+    transform: scale(1.05);
+}
+
+.role-content {
+    text-align: left;
+}
+
+.role-card h3 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.role-card p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Footer */
+footer {
+    background-color: #4a58d4;
+    color: white;
+    padding: 50px 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 3px;
+    background-color: var(--secondary);
+    bottom: 0;
+    left: 0;
+}
+
+.footer-column p {
+    color: #bdc3c7;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.contact-info {
+    color: #bdc3c7;
+    font-size: 0.9rem;
+}
+
+.contact-info div {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.contact-info i {
+    margin-right: 10px;
+    color: var(--secondary);
+    font-size: 1rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--primary);
+    color: #bdc3c7;
+    font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-hero {
+        min-height: 200px;
+    }
+    
+    .login-hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .login-hero-content p {
+        font-size: 1rem;
+    }
+    
+    .role-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .header-top {
+        flex-direction: column;
+    }
+
+    .logo {
+        margin-bottom: 15px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .role-container {
+        padding: 20px;
+        width: 95%;
+    }
+    
+    .role-card {
+        padding: 15px;
+    }
+    
+    .role-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin-right: 15px;
+    }
+    
+    .role-card h3 {
+        font-size: 1.1rem;
+    }
+    
+    .role-card p {
+        font-size: 0.8rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}

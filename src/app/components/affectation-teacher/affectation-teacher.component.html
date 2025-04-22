@@ -1,0 +1,61 @@
+>
+        <div class="content-body">
+            <div class="form-container" >
+   
+                <h1 class="form-title">Fiche Enseignant</h1>
+        
+        <div class="info-section">
+            <h3>Informations Personnelles</h3>
+            <div class="info-row">
+                <div class="info-label">Nom:</div>
+                <div class="info-value">{{ professor.firstName }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Prénom:</div>
+                <div class="info-value">{{ professor.lastName }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Email:</div>
+                <div class="info-value">{{ professor.email }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Téléphone:</div>
+                <div class="info-value">{{ professor.phone }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Spécialité:</div>
+                <div class="info-value">{{ professor.specialite }}</div>
+            </div>
+        </div>
+        
+        <div class="info-section"> 
+            <h3>Affectation</h3>
+            <label>Matière:</label>
+            <select  class="form-control" multiple required [(ngModel)]="selectedMatiere">
+                <option *ngFor="let m of matiere" [value]="m._id">{{ m.name }}</option>
+            </select>
+            <label>Classe:</label>
+
+            <select  class="form-control" id="classes" name="classes" multiple required [(ngModel)]="selectedClasse">
+                <option *ngFor="let classe of classe"[value]="classe._id">{{ classe.nom }}</option>
+            </select>
+            
+           
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-success" (click)="affecterProfesseur()">Affecter le Professeur</button>
+
+            <!-- <button class="btn btn-primary">Modifier l'Affectation</button> -->
+            <!-- <button class="btn btn-secondary">Retour à la liste</button> -->
+        </div>
+				
+				
+				
+            </div>
+        </div>
+       
+
+
+        
+        

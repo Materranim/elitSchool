@@ -1,0 +1,75 @@
+
+        <div class="content-body">
+            <div class="container-fluid">
+				    
+                <!-- <div class="row page-titles mx-0">
+                    <div class="col-sm-6 p-md-0">
+                        <div class="welcome-text">
+                            <h4>All Professors</h4>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0);">Professors</a></li>
+                            <li class="breadcrumb-item active"><a href="javascript:void(0);">All Professors</a></li>
+                        </ol>
+                    </div>
+                </div> -->
+				
+				<div class="row">
+				
+					<div class="col-lg-12">
+						<div class="row tab-content">
+							<div id="list-view" class="tab-pane fade active show col-lg-12">
+								<div class="card">
+									<div class="card-header">
+									
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table id="example3" class="display" style="min-width: 845px">
+												<thead>
+													<tr>
+														<th>firstName</th>
+														<th>lastName</th>
+														<th>email</th>
+														<th>adresse</th>
+														<th>phone</th>
+														<th>specialite</th>
+                                                        <th>classe</th>
+                                                        <th>matieres</th>
+														<th>Action</th>
+														
+													</tr>
+												</thead>
+												<tbody>
+													<tr *ngFor="let p of professor" >
+														<td>{{ p.firstName }} </td>
+                                                        <td> {{ p.lastName }}</td>														
+                                                        <td>{{p.email}}</td>
+                                                         <td>{{p.adresse}}</td>
+                                                         <td>{{p.phone}}</td>
+                                                         <td>{{p.specialite}}</td> 
+                                                         <td *ngFor="let classe of p.refClasses">{{ classe.nom }} </td>
+                                                         <td *ngFor="let matiere of p.refMatieres">{{ matiere.name }}</td>
+                                                         <!-- <td> <button class="btn btn-sm btn-sm" >
+                                                            <i class="fas fa-edit"></i> Éditer
+                                                        </button></td>	 -->
+									
+													</tr>
+													
+												</tbody>
+											</table> 
+										</div>
+									</div>
+                                </div>
+                            </div>
+							
+						</div>
+					</div>
+				</div>
+				
+            </div>
+        </div>
+      

@@ -1,0 +1,102 @@
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <!-- <img src="/assets/images/logoElite.jpg" alt="Logo Collège Elite"> -->
+                    Collège Elite <span>Excellence Éducative</span>
+                </div>
+                <div class="auth-links">
+                    <a href="/" class="signup">Accueil</a>
+                    <a href="/contact">Contact</a>
+                </div>
+            </div>
+            
+        </div>
+    </header>
+    
+    <section class="login-hero">
+        <div class="login-hero-content">
+            <h1>Espace de Connexion</h1>
+            <p>Accédez à votre compte personnel</p>
+        </div> 
+    </section>
+    
+    <section class="login-section">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>Connectez-vous</h2>
+                <p>Utilisez vos identifiants pour accéder à votre espace</p>
+            </div>
+            
+            <form (ngSubmit)="login()">
+                <div class="form-group">
+                    <label for="email">Email </label>
+                    <input type="email" id="email"  [(ngModel)]="user.email" name="a" placeholder="Entrez votre email " required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" [(ngModel)]="user.password" name="b" placeholder="Entrez votre mot de passe" required>
+                </div>
+                
+                <div class="remember-forgot">
+                    
+                    <div class="forgot-password">
+                        <a href="mot-de-passe-oublie.html">Mot de passe oublié ?</a>
+                    </div>
+                </div> 
+                
+                <button type="submit" class="login-btn">Se connecter</button>
+                
+              
+                
+                
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Collège Privé Elite</h3>
+                    <p>Établissement d'enseignement privé agréé par le Ministère de l'Éducation tunisien, spécialisé dans les classes de 7ème, 8ème et 9ème années.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens Utiles</h3>
+                    <ul>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="frais-scolarite.html">Frais de scolarité</a></li>
+                        <li><a href="transport.html">Transport scolaire</a></li>
+                        <li><a href="restauration.html">Restauration</a></li>
+                        <li><a href="reglement.html">Règlement intérieur</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Niveaux Scolaires</h3>
+                    <ul>
+                        <li><a href="7eme-annee.html">7ème Année</a></li>
+                        <li><a href="8eme-annee.html">8ème Année</a></li>
+                        <li><a href="9eme-annee.html">9ème Année</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Coordonnées</h3>
+                    <div class="contact-info">
+                        <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+                        <div><i class="fas fa-map-marker-alt"></i> Rue de l'Éducation, Cité El Khadra, Tunis</div>
+                        <div><i class="fas fa-phone"></i> +216 71 123 456</div>
+                        <div><i class="fas fa-envelope"></i> contact@collegeelite.tn</div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Collège Privé Elite. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>

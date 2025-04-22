@@ -1,0 +1,67 @@
+
+                        <div class="content-body">
+                            <div class="container-fluid">
+                                <!-- <div class="row page-titles mx-0">
+                                    <div class="col-sm-6 p-md-0">
+                                        <div class="welcome-text">
+                                            <h4>Hi, welcome back!</h4>
+                                            <span class="ml-1">Tab</span>
+                                        </div>
+                                    </div>
+                                     
+                                </div> -->
+                        
+                                <div class="row">
+                                    <div class="container">
+                                        <h1>{{title1}}</h1> 
+                        
+                                        <div class="form-container">
+                                            <form method="post" (ngSubmit)="addEditMatiere()">
+                                                
+                                                
+                                                   <div class="form-group">
+                                                    <label for="classes">Niveau *</label>
+                                                    <select id="classes" name="a"  required [(ngModel)]="matiere.idNiveau" (change)="onNiveauChange()">
+                                                        <option *ngFor="let n of niveau" [value]="n._id">
+                                                            {{ n.name }}
+                                                        </option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="matiere">Nom de la matière *</label>
+                                                    <input type="text" id="matiere" name="matiere" [(ngModel)]="matiere.name" required>
+                                                </div>
+                         
+                                                  <div class="form-group">
+                                                    <label for="coefficient">Coefficient *</label>
+                                                    <select id="coefficient" name="coefficient" [(ngModel)]="matiere.coefficient" required >
+                                                      <option value="" disabled >-- Choisir un coefficient --</option>
+                                                      <option *ngFor="let coef of coefficientOptions" [value]="coef">{{ coef }}</option>
+                                                    </select>
+                                                  </div>
+                                                  
+                                                  
+                                                  
+
+
+                                                <div class="form-group">
+                                                    <label for="heures">Heures/semaine *</label>
+                                                    <input type="number" id="heures" name="heures" [(ngModel)]="matiere.heures" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="message">Description</label>
+                                                    <textarea id="message" [(ngModel)]="matiere.desc" name="b" ></textarea>
+                                                </div>
+
+                                                <div class="form-actions">
+                                                    <button type="submit" class="btn">{{title}}</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        

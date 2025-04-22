@@ -1,0 +1,67 @@
+/* Styles pour les dropdowns */
+.has-arrow {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .has-arrow.active {
+    color: #fff;
+    background-color: #4b5ff1; /* Conserve la couleur originale pour le menu principal */
+  }
+  
+  .has-arrow + ul {
+    padding-left: 15px;
+    display: none;
+    background-color: transparent;
+  }
+  
+  /* Lien normal */
+  .has-arrow + ul li a {
+    padding: 8px 15px;
+    display: block;
+    color: #a7a7a7;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+ 
+  
+
+  
+  /* Survol des liens - Changé en noir */
+  .has-arrow + ul li a:hover {
+    background-color: transparent;
+    color: #000 !important; /* Noir au survol */
+  }
+  
+  /* Animation douce pour l'ouverture/fermeture */
+  .has-arrow + ul {
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+
+  .logout-item {
+    cursor: pointer;
+    padding: 10px 15px;
+    margin-top: 10px; /* pour le faire descendre un peu */
+    color: #333;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+  }
+  
+  .logout-item:hover {
+    background-color: #f0f0f0;
+    color: #000;
+    border-radius: 5px;
+  }
+  .logout-item i {
+    margin-right: 8px;
+  }
+  
+
+ 
+
+

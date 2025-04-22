@@ -1,0 +1,91 @@
+
+		<div class="content-body">
+			<div class="container-fluid">
+				<!-- <div class="row page-titles mx-0">
+					<div class="col-sm-6 p-md-0">
+						<div class="welcome-text">
+							<h4>Hi, welcome back!</h4>
+							<span class="ml-1">Tab</span>
+						</div>
+					</div>
+					 
+				</div> -->
+		
+				<div class="row">
+					<div class="container">
+						<h1>Ajouter Cours</h1> 
+		 
+						<div class="form-container">
+							<form method="post" (ngSubmit)="addCours()">
+								
+								<div class="form-group">
+									<label for="matiere">Nom *</label>
+									<input type="text" [(ngModel)]="cour.nom"  name="b" placeholder="Nom" required>
+								</div>
+		 
+								
+								<div class="form-group">
+									<label for="heures">Durée * </label>
+									<input type="number"  [(ngModel)]="cour.duree" name="a" placeholder="Durée" required>
+								</div>
+
+								<div class="form-group">
+									<label for="message">Description </label>
+									<textarea id="message" [(ngModel)]="cour.desc" name="a" placeholder="Description"></textarea>
+								</div>
+
+
+<!-- TP -->
+<!-- <div class="form-group">
+	<label>TP :</label><br>
+	<label>
+	  <input type="radio" name="hasTP" [(ngModel)]="hasTP" [value]="true"> Oui
+	</label>
+	<label>
+	  <input type="radio" name="hasTP" [(ngModel)]="hasTP" [value]="false"> Non
+	</label>
+  </div> -->
+  
+  <div class="form-group">
+	<label>TP :</label><br>
+	<div class="radio-group" style="display: flex; align-items: center; gap: 10px;">
+	  <label style="display: flex; align-items: center;">
+		<input type="radio" name="hasTP" [(ngModel)]="hasTP" [value]="true" style="margin-right: 5px;"> Oui
+	  </label>
+	  <label style="display: flex; align-items: center;">
+		<input type="radio" name="hasTP" [(ngModel)]="hasTP" [value]="false" style="margin-right: 5px;"> Non
+	  </label>
+	</div>
+  </div>
+  <div class="form-group" *ngIf="hasTP">
+	<button type="button" (click)="tpPicker.click()" class="btn btn-primary">
+	  Sélectionner TP
+	</button>
+  
+	<input style="visibility: hidden;" type="file" #tpPicker (change)="onTpSelected($event)">
+	<p *ngIf="tpFileName">TP sélectionné : {{ tpFileName }}</p>
+  </div>
+  
+ <!-- TP -->
+
+								<button type="button" (click)='filePicker.click()' class="btn btn-primary">
+									Sélectionner cour</button>
+									
+									<div class="form-group">
+									<input style="visibility: hidden;" type="file" class="form-control"
+									#filePicker (change)='onImageSelected($event)' />
+									<p *ngIf="courFileName">Cours sélectionné : {{ courFileName }}</p>
+
+									</div>
+									<img [src]="filePreview">
+
+								<div class="form-actions">
+									<button type="submit" class="btn"> Ajouter </button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		

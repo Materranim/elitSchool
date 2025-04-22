@@ -1,0 +1,123 @@
+
+<!-- <div class="content-body">
+    <div class="container-fluid">
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Hi, welcome back!</h4>
+                    <span class="ml-1">Tab</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <h1>Ajouter une Classe</h1>
+
+                <div class="form-container">
+                    <form method="post" (ngSubmit)="addEditNiveau()">
+                        
+                        <div class="form-group">
+                            <label for="select-level">Niveau :</label>
+                            <select id="select-level" [(ngModel)]="classe.niveau" name="n"  required>
+                                <option value="" disabled selected>-- Sélectionnez --</option>
+                                <option value="7ème Année">7ème Année</option>
+                                <option value="8ème Année">8ème Année</option>
+                                <option value="9ème Année">9ème Année</option>
+                            </select>
+            
+            
+                        </div>
+
+    <div class="form-group" *ngIf="classe.niveau">
+        <label for="select-letter">Lettre :</label>
+        <select id="select-letter" required (change)="onLetterSelect(($event.target as HTMLSelectElement).value)">
+            <option value="" disabled selected>-- Choisir une lettre --</option>
+          <option *ngFor="let l of filteredLetters" [value]="l">{{ l }}</option>
+        </select>
+      </div>
+
+
+                        <div class="form-group">
+                            <label for="class-name">Nom de la classe :</label>
+                            <input type="text" id="class-name"  [(ngModel)]="classe.nom" name="nom" placeholder="Nom de la classe" >
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="message">Description</label>
+                            <textarea id="message" [(ngModel)]="classe.desc" name="b" ></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn">{{title}}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<div class="content-body">
+    <div class="container-fluid">
+      <!-- <div class="row page-titles mx-0">
+        <div class="col-sm-6 p-md-0">
+          <div class="welcome-text">
+            <h4>Hi, welcome back!</h4>
+            <span class="ml-1">Tab</span>
+          </div>
+        </div>
+      </div> -->
+  
+      <div class="row">
+        <div class="container">
+          <h1>Ajouter une Classe</h1>
+  
+          <div class="form-container">
+            <form method="post" (ngSubmit)="addEditNiveau()">
+              
+              <!-- Niveau -->
+              <div class="form-group">
+                <label for="classes">Niveau *</label>
+                <select id="classes" name="a" required [(ngModel)]="classe.idNiveau" (change)="onLevelChange()" >
+                  <option value="" disabled selected >-- Sélectionnez --</option>
+                  <option *ngFor="let c of niveau" [value]="c._id">
+                    {{ c.name }} </option>
+                </select>
+              </div>
+  
+              <!-- nom -->
+              <div class="form-group" *ngIf="classe.idNiveau">
+                <label for="select-letter">Nom *</label>
+                <select id="select-letter" required (change)="onLetterSelect($event)">
+                  <option value="" disabled selected>-- Choisir nom de la classe --</option>
+                  <option *ngFor="let l of filteredLetters" [value]="l">{{ l }}</option>
+                </select>
+              </div>
+  
+              <!-- Nom généré dynamiquement -->
+              <div class="form-group">
+                <label for="class-name">Nom de la classe *</label>
+                <input type="text" id="class-name" [value]="getNomClasseAffiche()" readonly/>
+              </div>
+  
+              <!-- Description -->
+              <div class="form-group">
+                <label for="message">Description</label>
+                <textarea id="message" [(ngModel)]="classe.desc" name="b"></textarea>
+              </div>
+  
+              <div class="form-actions">
+                <button type="submit" class="btn">{{ title }}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+

@@ -1,0 +1,87 @@
+/* --- Table Styling --- */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* th {
+    background-color: #0b5ed7;
+    color: white;
+    text-transform: uppercase;
+} */
+
+/* tr:hover {
+    background-color: #f1f1f1;       ********************
+} */
+
+/* --- Button Styling --- */
+.btn {
+    padding: 10px 15px; /* Uniformiser la taille */
+    font-size: 14px;
+    font-weight: bold;
+    width: 150px; /* Même largeur pour tous les boutons */
+    text-align: center;
+}
+
+.btn-success {
+    background-color: #343a40;
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #23272b;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn:disabled {
+    cursor: default !important; /* Empêche le curseur de devenir une main */
+}
+
+td .btn {
+    margin-right: 7px; /* Espace entre les boutons */
+    padding: 6px 12px; /* Taille réduite */
+    font-size: 13px; /* Texte plus petit */
+    width: auto; /* Largeur automatique au lieu de 150px */
+    min-width: 60px; /*Largeur minimale pour uniformité */
+}
+/* Ajoutez cette règle */
+.btn-affecter {
+    background-color: #6673fd;
+    border-color: #6673fd;
+    color: white;
+}
+

@@ -1,0 +1,57 @@
+>
+        <div class="content-body">
+            <div class="form-container" >
+   
+                <h1 class="form-title">Fiche Etudiant</h1>
+        
+        <div class="info-section">
+            <h3>Informations Personnelles</h3>
+            <div class="info-row">
+                <div class="info-label">Nom:</div>
+                <div class="info-value">{{ student.firstName }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Prénom:</div>
+                <div class="info-value">{{ student.lastName }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Email:</div>
+                <div class="info-value">{{ student.email }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Téléphone:</div>
+                <div class="info-value">{{ student.phone }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Spécialité:</div>
+                <div class="info-value">{{ student.classe }}</div>
+            </div>
+        </div>
+        
+        <div class="info-section"> 
+            <h3>Affectation</h3>
+           
+            <label>Classe:</label>
+
+            <select  class="form-control" id="classes" name="classes" multiple required [(ngModel)]="sClasse">
+                <option *ngFor="let classe of classe"[value]="classe._id">{{ classe.nom }}</option>
+            </select>
+            
+           
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-success" (click)="affecterStudent()">Affecter le student </button>
+
+            
+        </div>
+				
+				
+				
+            </div>
+        </div>
+       
+
+
+        
+        

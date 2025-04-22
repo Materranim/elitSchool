@@ -1,0 +1,177 @@
+<div id="preloader">
+    <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+    </div>
+</div>
+ 
+<div id="main-wrapper">
+<div class="nav-header">
+    <a href="index.html" class="brand-logo">
+        <img class="logo-abbr" src="assets/images/logo-white.png" alt="">
+        <img class="logo-compact" src="assets/images/logo-text-white.png" alt="">
+        <!-- <img class="brand-title" src="/assets/images/logoElite.jpg" alt=""> -->
+    </a>
+
+</div>
+
+ 
+
+  <!-- <div class="header"> 
+    <div class="header-content">
+        <nav class="navbar navbar-expand">
+            <div class="collapse navbar-collapse justify-content-between">
+                <div class="header-left">
+                    <li *ngIf="isLogged()" ><a class="nav-link">{{connectedUser.firstName + ' ' + connectedUser.lastName}} </a></li>
+
+                </div>
+
+                <ul class="navbar-nav header-right">
+                    
+                </ul>
+
+                
+                <div class="header-right">
+                  
+                             
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>   -->
+
+<div class="header"> 
+    <div class="header-content">
+        <nav class="navbar navbar-expand">
+            <div class="collapse navbar-collapse justify-content-between">
+                <div class="header-left">
+                    <!-- Vous pouvez conserver votre élément existant -->
+                    <li *ngIf="isLogged()"><a class="nav-link">{{connectedUser.firstName + ' ' + connectedUser.lastName}}</a></li>
+                </div>
+
+                <div class="header-right">
+                    <div class="user-profile-container">
+                     
+                        
+                        <!-- Nom et menu dropdown -->
+                       
+                        <a *ngIf="isLogged()" (click)="logout()" class="dropdown-item logout-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+                            <span>Déconnexion</span>
+                          </a>
+                        
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+
+<div class="dlabnav">
+    <div class="dlabnav-scroll">
+        <ul class="metismenu" id="menu">
+           
+           
+           
+            <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="la la-home"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="index.html">Dashboard 1</a></li>
+                  
+                </ul>
+            </li> -->
+            
+             
+            
+            
+<!--             
+            <li><a class="ai-icon" href="event-management.html" aria-expanded="false">
+                    <i class="la la-calendar"></i>
+                    <span class="nav-text">Event Management</span>
+                </a>
+            </li>
+             -->
+            
+            
+            
+            <li *ngIf="isLogged() && connectedUser.role== 'admin' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="la la-user"></i>
+                    <span class="nav-text">Enseignants</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a routerLink="/All-Professors">liste Enseignant</a></li>
+                    <!-- <li><a routerLink="/teachers-list">liste Professor</a></li> -->
+
+                </ul>
+            </li>
+            
+           
+           
+           
+            <li *ngIf="isLogged() && connectedUser.role== 'admin' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="la la-users"></i>
+                    <span class="nav-text">Élèves</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a routerLink="/All-Students">liste Élève</a></li>
+                   
+                </ul>
+            </li>
+
+            
+            
+               <!-- Nouveau Menu Matières -->
+               <li *ngIf="isLogged() && connectedUser.role== 'admin' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <i class="la la-book"></i> <!-- Icône de livre pour les matières -->
+                <span class="nav-text">Matières</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a routerLink="/tab-matieres">Liste des Matières</a></li>
+                <li><a routerLink="/add-matieres">Ajouter Matière</a></li>
+            </ul>
+        </li>
+
+
+        <li *ngIf="isLogged() && connectedUser.role== 'admin' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            <i class="fas fa-school"></i>
+            <span class="nav-text">Classes</span>
+        </a>
+        <ul aria-expanded="false">
+            <!-- <li><a routerLink="/tab-classe">Liste des Classes</a></li> -->
+            <li  ><a routerLink="/admin-classes">Ajouter Classe</a></li>
+
+        </ul>
+        </li>
+            
+            
+            <li *ngIf="isLogged() && (connectedUser.role == 'admin' || connectedUser.role == 'teacher')" ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="la la-graduation-cap"></i>
+                    <span class="nav-text">Courses</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a routerLink="add-cours">Ajouter Courses</a></li>
+                  
+                </ul>
+            </li>
+            
+            
+        </ul>
+        
+    </div>
+</div>
+
+
+
+
+
+</div>
