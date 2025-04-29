@@ -11,12 +11,12 @@ const classeSchema = mongoose.Schema({
 
     desc:String,
     idNiveau:{type: String , ref:'Niveau'},
-    profId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] 
+    profId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }] ,
+    idCours: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Cour' }],
 
 
-    // refMatieres: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Matiere' }] ,// Liste des matières associées
     // refProfessors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // Liste des professeurs affectés
-    // IdStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    IdStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 
 }, { timestamps: true });
  

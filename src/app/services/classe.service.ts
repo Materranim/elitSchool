@@ -40,6 +40,10 @@ export class ClasseService {
     getNomClasse() {
       return this.httpClient.get<{ nomClasse: string[] }>('http://localhost:3000/nomClasse');
     }
-    
+  
+    getClassesByTeacher(teacherId: string) {
+      return this.httpClient.get<{data:any[]}>(`${this.classeUrl}/teacher/${teacherId}`);
+    }
+  
   
 }

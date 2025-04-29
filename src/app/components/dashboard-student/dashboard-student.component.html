@@ -1,0 +1,110 @@
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row dashboard-container">
+            <div class="col-lg-12">
+                <div class="row">
+                    <!-- Première carte - Profil élève -->
+                    <div class="col-md-4">
+                        <div class="card profile-card">
+                            <div class="card-body text-center">
+                                <div class="student-avatar">
+                                    <img 
+                                      [src]="connectedUser.photoProfil " 
+                                      alt="Photo de l'élève" 
+                                      class="rounded-circle"
+                                      style="width: 120px; height: 120px;"
+                                    >
+                                  </div>
+                                <h3 class="student-name">{{ connectedUser.firstName }} {{ connectedUser.lastName }}</h3>
+                                
+                                <div class="student-info">
+                                    <p><i class="fas fa-envelope"></i> {{ connectedUser.email }}</p>
+                                   
+                                    <p><i class="fas fa-users"></i>  {{ connectedUser.classe }} {{ connectedUser.refClasses?.[0]?.nom }}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deuxième carte - Version alternative -->
+                    <div class="col-md-8">
+                        <div class="card info-card-alt">
+                            <div class="card-body">
+                                <!-- Section supérieure avec deux colonnes -->
+                                <div class="top-section">
+                                    <div class="schedule-section">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="section-title-alt"><i class="fas fa-calendar-week"></i> Emploi du temps</h4>
+                                        </div>
+                                        <div class="schedule-box d-flex flex-column justify-content-center align-items-center">
+                                            <button class="btn btn-schedule-alt">
+                                                <i class="fas fa-eye"></i> Consulter l'emploi du temps
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- <div class="announcements-section">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="section-title-alt"><i class="fas fa-bullhorn"></i> Annonces</h4>
+                                        </div>
+                                        <div class="announcements-alt">
+                                            <div class="announcement-item-alt">
+                                                <div class="announcement-content">
+                                                    <div class="announcement-text">Sortie pédagogique au musée</div>
+                                                    <div class="announcement-meta">
+                                                        <span class="date">10/06/2023</span>
+                                                        <span class="course">Sciences</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="announcement-item-alt">
+                                                <div class="announcement-content">
+                                                    <div class="announcement-text">Contrôle de mathématiques</div>
+                                                    <div class="announcement-meta">
+                                                        <span class="date">05/06/2023</span>
+                                                        <span class="course">Maths</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                                
+                                <!-- Section accès rapide -->
+                                <div class="quick-access-section">
+                                    <div class="quick-links-alt">
+                                        <a routerLink="/dashboard-studentProf" class="quick-link-alt">
+                                            <div class="link-icon teachers">
+                                                <i class="fas fa-chalkboard-teacher"></i>
+                                            </div>
+                                            <span>Professeurs</span>
+                                        </a>
+                                        <a routerLink="cours.html" class="quick-link-alt">
+                                            <div class="link-icon subjects">
+                                                <i class="fas fa-book"></i>
+                                            </div>
+                                            <span>Cours</span>
+                                        </a>
+                                        <a routerLink="notes.html" class="quick-link-alt">
+                                            <div class="link-icon grades">
+                                                <i class="fas fa-chart-line"></i>
+                                            </div>
+                                            <span>Notes</span>
+                                        </a>
+                                        <a routerLink="devoirs.html" class="quick-link-alt">
+                                            <div class="link-icon homework">
+                                                <i class="fas fa-tasks"></i>
+                                            </div>
+                                            <span>Devoirs</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

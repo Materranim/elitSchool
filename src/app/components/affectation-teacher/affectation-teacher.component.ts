@@ -33,14 +33,14 @@ export class AffectationTeacherComponent implements OnInit {
   getProfessorByID(){
    this.usersService.getProfessorByID(this.id).subscribe((res)=>{
       this.professor=res.professor
-      console.log(this.professor);
+      // console.log(this.professor);
       
     })
   }
     getAllClasses(){
       this.classeService.getAllClasses().subscribe((res)=>{
        this.classe=res.data
-        //  console.log(this.classe);
+        //  console.log('classe',this.classe);
          
         }) 
          
@@ -48,10 +48,11 @@ export class AffectationTeacherComponent implements OnInit {
      
       getAllMatieres(){
         this.matiereService.getAllMatieres().subscribe((res) => {
-            console.log("Données reçues :", res);
+            // console.log("Données reçues :", res);
             this.matiere = [...res.matiereNiveau1, ...res.matiereNiveau2, ...res.matiereNiveau3]; 
         }, (err) => {
             console.error("Erreur lors de la récupération des matières :", err);
+            
         });
     }
     
@@ -63,13 +64,12 @@ export class AffectationTeacherComponent implements OnInit {
         matiereId: this.selectedMatiere,
         classeId: this.selectedClasse
       };
-      //dazdjazdazdazjdzoazd
     
       this.matiereService.affecterProfesseur(data).subscribe(
         (res) => {
           console.log(res.message);
           this.toastr.success('Affectation réussie !', 'Succès');
-           this.router.navigate(['/interface'])
+           this.router.navigate(['/teachers-list'])
 
         },
         (err) => {

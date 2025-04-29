@@ -15,7 +15,8 @@ export class CoursService {
     formData.append('duree' , data.duree)
     formData.append('nom' , data.nom)
     formData.append('desc', data.desc)
-    // formData.append('teacherId', data.teacherId); // si tu as stocké l'ID du user connecté
+    formData.append('teacherId', data.teacherId); // si tu as stocké l'ID du user connecté
+    formData.append('idClasse', data.idClasse);
     if (tpFile) {
       formData.append('tp', tpFile);
     }
@@ -23,9 +24,20 @@ export class CoursService {
    return this.httpClient.post<{message:any}>(this.coursUrl , formData) 
   }
 
-
- 
-    getAllCours(role: string, userId: string) {
-      return this.httpClient.get<{data:any}>(`${this.coursUrl}?role=${role}&userId=${userId}`);
+  
+   // Récupérer les cours par TeacherId
+   getCoursByTeacherId(teacherId: string) {
+    return this.httpClient.get(`${this.coursUrl}/teacher/${teacherId}`);
+  }
+  
+    // Récupérer les cours par TeacherId
+    getCoursByStudentId(studentId: string) {
+      return this.httpClient.get(`${this.coursUrl}/student/${studentId}`);
     }
+ 
+
+   
+
+     
 }
+

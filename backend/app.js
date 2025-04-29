@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 
 
 app.use("/images", express.static(path.join("backend/images")));
-app.use("/cvs", express.static(path.join("backend/cvs")));
+// app.use("/cvs", express.static(path.join("backend/cvs")));
 
 const MIME_TYPE = {
   "image/png": "png",
@@ -98,250 +98,87 @@ const storageCV = multer.diskStorage({
   },
 });
 
-//  app.post('/api/signup',
-//   multer({ storage: storage }).fields([{ name: "photoProfil" }, { name: "cv" }]),
-//   (req, res) => {
-//     console.log(req.body);
-//     console.log("Files", req.files);
-//     let url = req.protocol + "://" + req.get("host");
-
-//     // Profile Image
-//     let image = req.files["photoProfil"]
-//       ? url + "/images/" + req.files["photoProfil"][0].filename
-//       : null;
-
-    
-   
-//     // CV File
-//     let cv = req.files["cv"]
-//       ? url + "/cvs/" + req.files["cv"][0].filename
-//       : null;
-
-//       bcrypt.hash(req.body.password, 10, function (err, hash) {
-//         if (err) {
-//           console.log("bcrypt error");
-//         } else {
-//           const data = new User({
-//             role: req.body.role,
-                    
-//                     firstName: req.body.firstName,
-//                     lastName: req.body.lastName,
-//                     email: req.body.email,
-//                     adresse: req.body.adresse,
-//                     phone: req.body.phone,
-//                     password: hash,
-//                     specialite: req.body.specialite,
-//                     cv:cv,
-//                     photoProfil:image,
-//                     phoneEnfant: req.body.phoneEnfant,
-//                     classe:req.body.classe,
-                    
-//           });
-  
-//           data.save((error, docs) => {
-//             if (error) {
-//               console.log("Database error", error);
-//               res.status(200).json({ message: "1" });
-//             } else {
-//               res.status(200).json({ message: "0" });
-//             }
-//           });
-//         }
-//       });
-//     }
-//   );
-
-
-app.post("/api/signup",
-  multer({ storage: storage }).fields([{ name: "photoProfil" }, { name: "cv" }]),
-  async (req, res) => {
+  app.post("/api/signup", multer({ storage: storage }).fields([{ name: "photoProfil" }, { name: "cv" }]),
+    async (req, res) => {
       console.log(req.body);
       console.log("Files", req.files);
       let url = req.protocol + "://" + req.get("host");
-
+  
       // Profile Image
       let image = req.files["photoProfil"]
-          ? url + "/images/" + req.files["photoProfil"][0].filename
-          : null;
-
+        ? url + "/images/" + req.files["photoProfil"][0].filename
+        : null;
+  
       // CV File
       let cv = req.files["cv"]
-          ? url + "/images/" + req.files["cv"][0].filename
-          : null;
-
-      // 🔹 Vérifier si c'est un parent et si le numéro de l'enfant existe
+        ? url + "/images/" + req.files["cv"][0].filename
+        : null;
+  
+      //  Vérifier si c'est un parent et si le numéro de l'enfant existe
       if (req.body.role === "parent") {
-          const studentExists = await User.findOne({ role: "student", phone: req.body.phoneEnfant });
-
-          if (!studentExists) {
-              return res.status(400).json({ message: "Le numéro de l'enfant n'existe pas. Inscription refusée." });
-          }
+        const studentExists = await User.findOne({ role: "student", phone: req.body.phoneEnfant });
+  
+        if (!studentExists) {
+          return res.status(400).json({ message: "Le numéro de l'enfant n'existe pas. Inscription refusée." });
+        }
       }
-
+  
       bcrypt.hash(req.body.password, 10, function (err, hash) {
-          if (err) {
-              console.log("bcrypt error");
-          } else {
-              const data = new User({
-                  role: req.body.role,
-                  firstName: req.body.firstName,
-                  lastName: req.body.lastName,
-                  email: req.body.email,
-                  adresse: req.body.adresse,
-                  phone: req.body.phone,
-                  password: hash,
-                  specialite: req.body.specialite,
-                  cv: cv,
-                  photoProfil: image,
-                  phoneEnfant: req.body.phoneEnfant,
-                  classe: req.body.classe,
-                  status: req.body.status
-              });
-
-              data.save(async (error, docs) => {
-                  if (error) {
-                      console.log("Database error", error);
-                      res.status(200).json({ message: "1" });
-                  } else {
-                      // Si le rôle est un professeur, on doit ajouter les étudiants assignés dans son profil
-                      if (req.body.role === "teacher") {
-                          try {
-                              const classe = await Classe.findById(req.body.classe);  // Récupérer la classe assignée au professeur
-                              if (classe) {
-                                  // Ajouter l'étudiant dans la classe (si ce n'est pas déjà fait)
-                                  classe.refProfessors.push(docs._id);  // Ajouter le professeur à la classe
-                                  await classe.save();
-
-                                  // Ajouter l'ID du professeur dans les étudiants de la classe (mettre à jour la collection User pour les étudiants)
-                                  for (let studentId of classe.IdStudents) {
-                                      const student = await User.findById(studentId);
-                                      if (student && student.role === "student") {
-                                          // Ajouter l'ID du professeur dans le profil de l'étudiant dans 'studentsAssigned'
-                                          if (!student.studentsAssigned.includes(docs._id)) {
-                                              student.studentsAssigned.push(docs._id);
-                                              await student.save();
-                                          }
-                                      }
-                                  }
-                              }
-                          } catch (err) {
-                              console.log("Erreur lors de l'affectation des étudiants au professeur", err);
-                          }
-                      }
-                      res.status(200).json({ message: "0" });
-                  }
-              });
-          }
+        if (err) {
+          console.log("bcrypt error");
+        } else {
+          const data = new User({
+            role: req.body.role,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            adresse: req.body.adresse,
+            phone: req.body.phone,
+            password: hash,
+            specialite: req.body.specialite,
+            cv: cv,
+            photoProfil: image,
+            phoneEnfant: req.body.phoneEnfant,
+            classe: req.body.classe,
+            status: req.body.status
+          });
+  
+          data.save((error, docs) => {
+            if (error) {
+              console.log("Database error", error);
+              res.status(200).json({ message: "1" });
+            } else {
+              res.status(200).json({ message: "0" });
+            }
+          });
+        }
       });
-  }
-);
-
-
-  // app.post("/api/signup",
-  //   multer({ storage: storage }).fields([{ name: "photoProfil" }, { name: "cv" }]),
-  //   async (req, res) => {
-  //     console.log(req.body);
-  //     console.log("Files", req.files);
-  //     let url = req.protocol + "://" + req.get("host");
+    }
+  );
   
-  //     // Profile Image
-  //     let image = req.files["photoProfil"]
-  //       ? url + "/images/" + req.files["photoProfil"][0].filename
-  //       : null;
-  
-  //     // CV File
-  //     let cv = req.files["cv"]
-  //       ? url + "/images/" + req.files["cv"][0].filename
-  //       : null;
-  
-  //     // 🔹 Vérifier si c'est un parent et si le numéro de l'enfant existe
-  //     if (req.body.role === "parent") {
-  //       const studentExists = await User.findOne({ role: "student", phone: req.body.phoneEnfant });
-  
-  //       if (!studentExists) {
-  //         return res.status(400).json({ message: "Le numéro de l'enfant n'existe pas. Inscription refusée." });
-  //       }
-  //     }
-  
-  //     bcrypt.hash(req.body.password, 10, function (err, hash) {
-  //       if (err) {
-  //         console.log("bcrypt error");
-  //       } else {
-  //         const data = new User({
-  //           role: req.body.role,
-  //           firstName: req.body.firstName,
-  //           lastName: req.body.lastName,
-  //           email: req.body.email,
-  //           adresse: req.body.adresse,
-  //           phone: req.body.phone,
-  //           password: hash,
-  //           specialite: req.body.specialite,
-  //           cv: cv,
-  //           photoProfil: image,
-  //           phoneEnfant: req.body.phoneEnfant,
-  //           classe: req.body.classe,
-  //           status: req.body.status
-  //         });
-  
-  //         data.save((error, docs) => {
-  //           if (error) {
-  //             console.log("Database error", error);
-  //             res.status(200).json({ message: "1" });
-  //           } else {
-  //             res.status(200).json({ message: "0" });
-  //           }
-  //         });
-  //       }
-  //     });
-  //   }
-  // );
-  
-
   app.post('/api/login', (req, res) => {
-    User.findOne({ email: req.body.email }).then(async (findedUser) => {
-      if (!findedUser) {
-        return res.status(200).json({ message: '0' }); // email incorrect
-      }
+    User.findOne({ email: req.body.email })
+      .populate('refClasses')     //  ajout populate refClasses
+      .populate('refMatieres')    //  ajout populate refMatieres
+      .then(async (findedUser) => {
+        if (!findedUser) {
+          return res.status(200).json({ message: '0' }); // email incorrect
+        }
   
-      const trustedPwd = await bcrypt.compare(req.body.password, findedUser.password);
-      if (!trustedPwd) {
-        return res.status(200).json({ message: '1' }); // Mot de passe incorrect
-      }
+        const trustedPwd = await bcrypt.compare(req.body.password, findedUser.password);
+        if (!trustedPwd) {
+          return res.status(200).json({ message: '1' }); // Mot de passe incorrect
+        }
   
-      
-      if (findedUser.role === 'teacher' && findedUser.status !== "confirmed") {
-        return res.status(200).json({ message: '3' }); // Prof non confirmé
-      }
+        if (findedUser.role === 'teacher' && findedUser.status !== "confirmed") {
+          return res.status(200).json({ message: '3' }); // Prof non confirmé
+        }
   
-      const token = jwt.sign({ user: findedUser }, secret_key, { expiresIn: '1h' });
-      return res.status(200).json({ message: '2', user: token }); // Succès
-    });
+        const token = jwt.sign({ user: findedUser }, secret_key, { expiresIn: '1h' });
+        return res.status(200).json({ message: '2', user: token }); // Succès
+      });
   });
   
-  
-   
-
-// app.post('/api/login', (req, res) => {
-//   User.findOne({ email: req.body.email }).then(async (findedUser) => {
-//       if (!findedUser) {
-//           return res.status(200).json({ message: '0' }); // email incorrect
-//       }
-
-//       const trustedPwd = await bcrypt.compare(req.body.password, findedUser.password);
-//       if (!trustedPwd) {
-//           return res.status(200).json({ message: '1' }); // Mot de passe incorrect
-//       }
-
-//       if (findedUser.status !== "confirmed") {
-//           return res.status(200).json({ message: '3' }); // Prof non confirmé
-//       }
-      
-//       const token = jwt.sign({ user: findedUser }, secret_key, { expiresIn: '1h' });
-//       return res.status(200).json({ message: '2', user: token }); // Succès
-//   });
-// });
-
-
 app.get('/api/Professor', (req, res) => {
   //trait logique get all Professors  ********
  
@@ -402,20 +239,13 @@ app.delete('/api/Professor/:id', (req, res) => {
 
 })
 
-// app.get('/api/Student', (req, res) => {
-//   //trait logique get all Student  ********
- 
-//   User.find({}).then((docs) => {
-//       res.status(200).json({ data: docs })
-//   })
 
-// })
 
 app.get('/api/Student/by-class', async (req, res) => {
   try {
-      const students7 = await User.find({ classe: "7eme" });
-      const students8 = await User.find({ classe: "8eme" });
-      const students9 = await User.find({ classe: "9eme" });
+      const students7 = await User.find({ classe: "7ème Année" });
+      const students8 = await User.find({ classe: "8ème Année" });
+      const students9 = await User.find({ classe: "9ème Année" });
 
       res.status(200).json({ students7, students8, students9 });
   } catch (error) {
@@ -447,45 +277,45 @@ app.delete('/api/student/:id', (req, res) => {
   })
 
 })
-// ✅ Route pour affecter un étudiant à une classe et mettre à jour les professeurs
-// app.post('/api/affecter', async (req, res) => {
-//   try {
-//     const { studentId, classeId } = req.body;
+//  Route pour affecter un étudiant à une classe et mettre à jour les professeurs
+app.post('/api/affecter', async (req, res) => {
+  try {
+    const { studentId, classeId } = req.body;
 
-//     // Vérifier si l'étudiant et la classe existent
-//     const student = await User.findById(studentId);
-//     if (!student) {
-//       return res.status(404).json({ message: "Étudiant non trouvé" });
-//     }
+    // Vérifier si l'étudiant et la classe existent
+    const student = await User.findById(studentId);
+    if (!student) {
+      return res.status(404).json({ message: "Étudiant non trouvé" });
+    }
 
-//     const classe = await Classe.findById(classeId);
-//     if (!classe) {
-//       return res.status(404).json({ message: "Classe non trouvée" });
-//     }
+    const classe = await Classe.findById(classeId);
+    if (!classe) {
+      return res.status(404).json({ message: "Classe non trouvée" });
+    }
 
-//     // Ajouter l'étudiant à la classe (dans refClasses et IdStudents)
-//     classe.IdStudents.push(studentId);
-//     await classe.save();
+    // Ajouter l'étudiant à la classe (dans refClasses et IdStudents)
+    classe.IdStudents.push(studentId);
+    await classe.save();
 
-//     // Ajouter la classe à l'étudiant dans refClasses
-//     student.refClasses.push(classeId);
-//     await student.save();
+    // Ajouter la classe à l'étudiant dans refClasses
+    student.refClasses.push(classeId);
+    await student.save();
 
-//     // Mettre à jour les professeurs associés à cette classe
-//     for (let professorId of classe.refProfessors) {
-//       const professor = await User.findById(professorId);
-//       if (professor) {
-//         professor.studentsAssigned.push(studentId);  // Ajouter l'étudiant dans le champ studentsAssigned du professeur
-//         await professor.save();
-//       }
-//     }
+    // // Mettre à jour les professeurs associés à cette classe
+    // for (let professorId of classe.profId) {
+    //   const professor = await User.findById(professorId);
+    //   if (professor) {
+    //     professor.studentsAssigned.push(studentId);  // Ajouter l'étudiant dans le champ studentsAssigned du professeur
+    //     await professor.save();
+    //   }
+    // }
 
-//     res.status(200).json({ message: "Étudiant affecté avec succès à la classe et aux professeurs associés" });
-//   } catch (error) {
-//     console.error("Erreur lors de l'affectation de l'étudiant :", error);
-//     res.status(500).json({ message: "Erreur serveur lors de l'affectation de l'étudiant" });
-//   }
-// });
+    res.status(200).json({ message: "Étudiant affecté avec succès à la classe et aux professeurs associés" });
+  } catch (error) {
+    console.error("Erreur lors de l'affectation de l'étudiant :", error);
+    res.status(500).json({ message: "Erreur serveur lors de l'affectation de l'étudiant" });
+  }
+});
 
 
 
@@ -532,22 +362,21 @@ app.post('/classes', (req, res) => {
 });
 
 
-app.get('/classes', (req, res) => {
-  
-  Classe.find().then((docs) => {
-      res.status(200).json({ data: docs })
-  })
-
-})
-
 // app.get('/classes', (req, res) => {
   
-//   Classe.find().populate('idNiveau').then((docs) => {
+//   Classe.find().then((docs) => {
 //       res.status(200).json({ data: docs })
 //   })
 
 // })
 
+app.get('/classes', (req, res) => {
+  
+  Classe.find().populate('idNiveau').then((docs) => {
+      res.status(200).json({ data: docs })
+  })
+
+})
 
 app.get('/classes/:id', (req, res) => {
   const id = req.params.id;
@@ -567,20 +396,6 @@ app.get('/classes/:id', (req, res) => {
     });
 });
 
-
-
-// app.get('/classes/:id', (req, res) => {
-    
-//   const id = req.params.id
-//   Classe.findOne({ _id: id }).then((findedClasse) => {
-//       res.status(200).json({ classe: findedClasse})
-//   })
-
-// })
-
-
-
-
 // app.delete('/classes/:id', (req, res) => {
 //  const id = req.params.id
 //  Classe.deleteOne({ _id: id }).then(() => {
@@ -588,7 +403,6 @@ app.get('/classes/:id', (req, res) => {
 //   })
 
 // })
-
 
 app.put('/classes', (req, res) => {
     
@@ -654,67 +468,6 @@ app.delete('/classes/:id', async (req, res) => {
     res.status(500).json({ message: "Erreur serveur" });
   }
 });
-
-
-// app.get('/matieres', async (req, res) => {
-//   try {
-//       const matiereNiveau1 = await Matiere.find({ niveau: "7eme" });
-//       const matiereNiveau2 = await Matiere.find({ niveau: "8eme" });
-//       const matiereNiveau3 = await Matiere.find({ niveau: "9eme" });
-
-//       res.status(200).json({ matiereNiveau1, matiereNiveau2, matiereNiveau3 });
-//   } catch (error) {
-//       res.status(500).json({ message: 'Erreur serveur', error });
-//   }
-// });
-
-
-
-
-
-
-// app.post('/matieres', async (req, res) nchofha 5ater code mbadel 
-
-
-// app.post('/matieres', async (req, res) => {
-//   try {
-//     // Créer une nouvelle matière
-//     const data = new Matiere({
-//       niveau: req.body.niveau,
-//       name: req.body.name,
-//       coefficient: req.body.coefficient,
-//       heures: req.body.heures,
-//       refClasses: req.body.refClasses
-//     });
-
-//     // Sauvegarde de la matière
-//     const doc = await data.save();
-
-//     // Vérifier si la classe existe
-//     const findedClasse = await Classe.findOne({ _id: req.body.refClasses });
-
-//     if (!findedClasse) {
-//       return res.status(404).json({ message: "Classe introuvable" });
-//     }
-
-//     // Mettre à jour la classe avec la nouvelle matière
-//     await Classe.updateOne(
-//       { _id: req.body.refClasses },
-//       { $push: { matiere: doc._id } }
-//     );
-
-//     res.status(200).json({ message: "Matière ajoutée avec succès" });
-
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Erreur serveur" });
-//   }
-// });
-
-
-
-
-
 
 
 app.get('/matieres/:id', (req, res) => {
@@ -802,9 +555,6 @@ app.delete('/matieres/:id', async (req, res) => {
   }
 });
 
-
-
-
 app.post('/matieres/affecterProfesseur', async (req, res) => {
   try {
       console.log("Données reçues:", req.body);
@@ -873,76 +623,130 @@ app.post('/matieres/affecterProfesseur', async (req, res) => {
 
 
 
-const MIME_TYPETwo= {
+// const MIME_TYPETwo= {
+//   "application/pdf": "pdf",
+// };
+// const storageTwo = multer.diskStorage({
+//   // destination
+//   destination: (req, file, cb) => {
+//       const isValid = MIME_TYPETwo[file.mimetype];
+//       let error = new Error("Mime type is invalid");
+//       if (isValid) {
+//           error = null;
+//       }
+//       cb(null, 'backend/cours')
+//   },
+//   filename: (req, file, cb) => {
+//       const name = file.originalname.toLowerCase().split(' ').join('-');
+//       const extension = MIME_TYPETwo[file.mimetype];
+//       const imgName = name + '-' + Date.now() + '-Elite-' + '.' +
+//           extension;
+//       cb(null, imgName);
+//   }
+// })
+
+app.use('/cours', express.static(path.join('backend/cours')));
+
+// Ta config Multer
+const MIME_TYPETwo = {
   "application/pdf": "pdf",
 };
 const storageTwo = multer.diskStorage({
-  // destination
   destination: (req, file, cb) => {
       const isValid = MIME_TYPETwo[file.mimetype];
       let error = new Error("Mime type is invalid");
       if (isValid) {
           error = null;
       }
-      cb(null, 'backend/cours')
+      cb(null, 'backend/cours'); // C’est bien
   },
   filename: (req, file, cb) => {
       const name = file.originalname.toLowerCase().split(' ').join('-');
       const extension = MIME_TYPETwo[file.mimetype];
-      const imgName = name + '-' + Date.now() + '-Elite-' + '.' +
-          extension;
+      const imgName = name + '-' + Date.now() + '-Elite-' + '.' + extension;
       cb(null, imgName);
   }
-})
-
-
-// app.post('/cours', multer({ storage: storageTwo }).single('file'), (req, res) => {
-//   let url = req.protocol + '://' + req.get('host');
-//   let file = url + '/cours/' + req.file.filename
-  
-//   console.log('add',req.body);
-  
-//   const data = new Cour({
-
-//       duree: req.body.duree,
-//       nom: req.body.nom,
-//       desc: req.body.desc,
-//       file :file,
-//       teacherId:req.body.teacherId
-//   })
-//   console.log("data",data);
-  
-//   data.save().then(() => {
-//       res.status(200).json({ message:'Cour Added' })
-//   })
-// })
-
-
-
+});
 app.post('/cours', multer({ storage: storageTwo }).fields([
   { name: 'file', maxCount: 1 },
   { name: 'tp', maxCount: 1 }
-]), (req, res) => {
-  let url = req.protocol + '://' + req.get('host');
+]), async (req, res) => {
+  try {
+    let url = req.protocol + '://' + req.get('host');
 
-  let file = req.files['file'] ? url + '/cours/' + req.files['file'][0].filename : '';
-  let tp = req.files['tp'] ? url + '/cours/' + req.files['tp'][0].filename : '';
+    let file = req.files['file'] ? url + '/cours/' + req.files['file'][0].filename : '';
+    let tp = req.files['tp'] ? url + '/cours/' + req.files['tp'][0].filename : '';
 
-  const data = new Cour({
-    duree: req.body.duree,
-    nom: req.body.nom,
-    desc: req.body.desc,
-    file: file,
-    tp: tp,
-    // teacherId: req.body.teacherId,
+    // 1. Créer le cours
+    const data = new Cour({
+      duree: req.body.duree,
+      nom: req.body.nom,
+      desc: req.body.desc,
+      file: file,
+      tp: tp,
+      teacherId: req.body.teacherId,
+      idClasse: req.body.idClasse
+    });
 
-  });
+    // 2. Sauvegarder le cours
+    const savedCours = await data.save();
 
-  data.save().then(() => {
-    res.status(200).json({ message:'Cour Added' })
-  });
+    // 3. Mettre à jour la classe pour ajouter l'ID du nouveau cours
+    await Classe.findByIdAndUpdate(
+      req.body.idClasse,
+      { $push: { idCours: savedCours._id } }
+    );
+
+    res.status(200).json({ message: 'Cour ajouté et Classe mise à jour !' });
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur serveur lors de l\'ajout du cours' });
+  }
 });
 
+app.get('/cours/teacher/:teacherId', async (req, res) => {
+  try {
+    const teacherId = req.params.teacherId; // Récupère l'ID du professeur depuis les paramètres de l'URL
+
+    // Recherche les cours associés à ce teacherId
+    const cours = await Cour.find({ teacherId: teacherId });
+
+    if (cours.length === 0) {
+      return res.status(404).json({ message: 'Aucun cours trouvé pour ce professeur.' });
+    }
+
+    // Si des cours sont trouvés, on les retourne
+    res.status(200).json(cours);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des cours:', error);
+    res.status(500).json({ message: 'Erreur serveur.' });
+  }
+});
+
+app.get('/classes/teacher/:teacherId', async (req, res) => {
+  try {
+    const teacherId = req.params.teacherId;
+    const classes = await Classe.find({ profId: teacherId }).populate('idNiveau');
+    res.status(200).json({ data: classes });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+});
+
+
+
+// // Dans votre fichier de routes (cours.js)
+// app.get('/teacher/:teacherId', async (req, res) => {
+//   try {
+//     const { teacherId } = req.params;
+//     const cours = await Cour.find({ teacherId });
+//     res.json({ data: cours });
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
 
 app.post('/niveau', (req, res) => {
   const data = new Niveau({
@@ -954,8 +758,6 @@ app.post('/niveau', (req, res) => {
      res.status(200).json({ message: 'Nivau Added' })
  })
 })
-
-
 app.get('/niveau', (req, res) => {
 
   Niveau.find().then((docs) => {
@@ -963,15 +765,6 @@ app.get('/niveau', (req, res) => {
   })
 
 })
-
-
-
-
-
-
-
-
-
 
 
 app.post('/matieres', (req, res) => {
@@ -1005,13 +798,11 @@ app.post('/matieres', (req, res) => {
 
   })
 })
-
-
- app.get('/matieres', async (req, res) => {
+app.get('/matieres', async (req, res) => {
       try {
-          const matiereNiveau1 = await Matiere.find({ nomNiveau: "7ème Année " }); // Notez l'espace
-          const matiereNiveau2 = await Matiere.find({ nomNiveau: "8ème Année " });
-          const matiereNiveau3 = await Matiere.find({ nomNiveau: "9ème Année " });
+          const matiereNiveau1 = await Matiere.find({ nomNiveau: "7ème Année" }); 
+          const matiereNiveau2 = await Matiere.find({ nomNiveau: "8ème Année" });
+          const matiereNiveau3 = await Matiere.find({ nomNiveau: "9ème Année" });
   
           res.status(200).json({ 
               success: true,
@@ -1027,9 +818,6 @@ app.post('/matieres', (req, res) => {
           });
       }
   });
-
-
-    
 app.get('/coefficient-options', (req, res) => {
   const schema = mongoose.model('Matiere').schema;
   const coefficientPath = schema.path('coefficient');
@@ -1047,5 +835,9 @@ app.get('/nomClasse', async (req, res) => {
   const enumValues = Classe.schema.path('nom').enumValues;
   res.json({ nomClasse: enumValues });
 });
+
+
+
+
 
 module.exports = app // make app exportable 

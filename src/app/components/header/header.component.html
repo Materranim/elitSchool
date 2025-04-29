@@ -48,7 +48,15 @@
             <div class="collapse navbar-collapse justify-content-between">
                 <div class="header-left">
                     <!-- Vous pouvez conserver votre élément existant -->
-                    <li *ngIf="isLogged()"><a class="nav-link">{{connectedUser.firstName + ' ' + connectedUser.lastName}}</a></li>
+                    <!-- <li *ngIf="isLogged()"><a class="nav-link">{{connectedUser.firstName + ' ' + connectedUser.lastName}}</a></li> -->
+
+                    
+                      <!-- <li *ngIf="isLogged()">
+                        <a class="nav-link" [href]="connectedUser.cv" target="_blank" *ngIf="connectedUser.cv">
+                          {{ connectedUser.firstName }} - Voir CV
+                        </a>
+                      </li> -->
+                      
                 </div>
 
                 <div class="header-right">
@@ -80,17 +88,25 @@
            
            
            
-            <!-- <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+            <li  *ngIf="isLogged() && connectedUser.role== 'student' "><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-home"></i>
                     <span class="nav-text">Dashboard</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="index.html">Dashboard 1</a></li>
+                    <li><a routerLink="/dashboard-student">Dashboard </a></li>
                   
                 </ul>
-            </li> -->
+            </li>
             
-             
+            <li *ngIf="isLogged() && connectedUser.role== 'student' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <i class="la la-user"></i>
+                <span class="nav-text"> Liste Enseignants</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a routerLink="/dashboard-studentProf">Liste Enseignants </a></li>
+
+            </ul>
+        </li>
             
             
 <!--             
@@ -109,12 +125,12 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a routerLink="/All-Professors">liste Enseignant</a></li>
-                    <!-- <li><a routerLink="/teachers-list">liste Professor</a></li> -->
+                    <li><a routerLink="/teachers-list">Details Enseignant </a></li>
 
                 </ul>
             </li>
             
-           
+        
            
            
             <li *ngIf="isLogged() && connectedUser.role== 'admin' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -153,17 +169,37 @@
         </ul>
         </li>
             
+        <li *ngIf="isLogged() && connectedUser.role== 'admin' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+            <i class="fas fa-school"></i>
+            <span class="nav-text">Niveaux</span>
+        </a>
+        <ul aria-expanded="false">
+            <!-- <li><a routerLink="/tab-classe">Liste des Classes</a></li> -->
+            <li  ><a routerLink="/add-niveau">Ajouter Niveau  </a></li>
+
+        </ul>
+        </li>
             
             <li *ngIf="isLogged() && (connectedUser.role == 'admin' || connectedUser.role == 'teacher')" ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="la la-graduation-cap"></i>
-                    <span class="nav-text">Courses</span>
+                    <span class="nav-text">Cours</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a routerLink="add-cours">Ajouter Courses</a></li>
-                  
+                    <li><a routerLink="add-cours">Ajouter Cours</a></li>
+                    <li><a routerLink="cours"> Cours</a></li>
+
                 </ul>
             </li>
             
+            <li *ngIf="isLogged() && connectedUser.role== 'student' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <i class="la la-book"></i> 
+                <span class="nav-text">Cours</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a routerLink="/cours-student"> Cours</a></li>
+            </ul>
+        </li>
             
         </ul>
         

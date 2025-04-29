@@ -5,7 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { InterfaceComponent } from './components/interface/interface.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component'; 
 import { AllProfessorsComponent } from './components/all-professors/all-professors.component';
 import { AllStudentsComponent } from './components/all-students/all-students.component';
 import { AdminClassesComponent } from './components/admin-classes/admin-classes.component';
@@ -21,6 +21,10 @@ import { LoginRoleComponent } from './components/login-role/login-role.component
 import { ContactComponent } from './components/contact/contact.component';
 import { UnauthorizedPageComponent } from './components/unauthorized-page/unauthorized-page.component';
 import { AuthGuard } from './services/services/auth.guard';
+import { DashboardStudentComponent } from './components/dashboard-student/dashboard-student.component';
+import { DashboardStudentProfComponent } from './components/dashboard-student-prof/dashboard-student-prof.component';
+import { CoursComponent } from './components/cours/cours.component';
+import { CoursEtudiantComponent } from './components/cours-etudiant/cours-etudiant.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent , data: { hideHeaderFooter: true }},
@@ -42,10 +46,14 @@ const routes: Routes = [
   {path:"teachers-list",component:TeachersListComponent , canActivate :[AuthGuard] ,  data:{role : 'admin'}},
   {path:"affectation-student/:id",component:AffectationStudentComponent  },
   {path:"add-cours",component:AddCoursComponent , canActivate :[AuthGuard] , data:{role : ['admin' , 'teacher']} },
+  {path:"cours",component:CoursComponent , canActivate :[AuthGuard] , data: {role : 'teacher'}  },
   {path:"add-niveau",component:NiveauxComponent , canActivate :[AuthGuard] ,  data:{role : 'admin'} },
   {path:"login-role",component:LoginRoleComponent  , data: { hideHeaderFooter: true } },
   {path:"contact",component:ContactComponent  , data: { hideHeaderFooter: true } },
   {path:"unauthorized",component:UnauthorizedPageComponent  , data: { hideHeaderFooter: true } },
+  {path:"dashboard-student",component:DashboardStudentComponent , canActivate :[AuthGuard] , data: {role : 'student'} },
+  {path:"dashboard-studentProf",component:DashboardStudentProfComponent , canActivate :[AuthGuard] , data: {role : 'student'} },
+  {path:"cours-student",component:CoursEtudiantComponent , canActivate :[AuthGuard] , data: {role : 'student'} },
 
 
 

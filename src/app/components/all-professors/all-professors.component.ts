@@ -64,9 +64,16 @@ export class AllProfessorsComponent implements OnInit {
 
 
 
-    goToAffectationPage(id: string) {
-      this.router.navigate(['/affectation-teacher', id]);
+  //   goToAffectationPage(id: string) {
+  //     this.router.navigate(['/affectation-teacher', id]);
+  // }
+  
+  goToAffectationPage(id: string) {
+    this.router.navigate(['/affectation-teacher', id]).then(() => {
+      window.location.reload();
+    });
   }
+  
   
 
   editProfessor(id: string) {

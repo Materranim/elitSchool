@@ -75,3 +75,20 @@ th, td {
     background-color: #3498db;
     color: white;
 }
+
+
+
+
+.pdf-fa-icon {
+    color: #e74c3c;
+    font-size: 2rem;
+    background: white;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  
+  .pdf-fa-icon:hover {
+    color: #c0392b;
+    transform: scale(1.1);
+  }

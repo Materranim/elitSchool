@@ -29,19 +29,18 @@
         </div>
         
         <div class="info-section"> 
-            <h3>Affectation</h3>
+            <h3>Affectation</h3> 
             <label>Matière:</label>
             <select  class="form-control" multiple required [(ngModel)]="selectedMatiere">
-                <option *ngFor="let m of matiere" [value]="m._id">{{ m.name }}</option>
+                <option *ngFor="let m of matiere" [value]="m._id">{{ m.name }} ({{ m.nomNiveau}})</option>
             </select>
             <label>Classe:</label>
 
             <select  class="form-control" id="classes" name="classes" multiple required [(ngModel)]="selectedClasse">
-                <option *ngFor="let classe of classe"[value]="classe._id">{{ classe.nom }}</option>
+                <option *ngFor="let classe of classe"[value]="classe._id">{{ classe.nom }} ({{ classe.idNiveau.name
+                }})</option>
             </select>
-            
-           
-        </div>
+            </div>
         
         <div class="action-buttons">
             <button class="btn btn-success" (click)="affecterProfesseur()">Affecter le Professeur</button>

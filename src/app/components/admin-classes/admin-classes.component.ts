@@ -83,22 +83,29 @@ export class AdminClassesComponent implements OnInit {
     this.classe.nom = '';
   }
 
+
   updateFilteredLetters() {
-    if (this.classe.idNiveau) {
-      const classesDuNiveau = this.classes.filter(
-        (c: any) => c.idNiveau === this.classe.idNiveau
-      );
-
-      const lettresUtilisées = classesDuNiveau.map((c: any) => c.nom);
-
-      this.filteredLetters = this.nomClasse.filter(
-        (letter) => !lettresUtilisées.includes(letter)
-      );
-    } else {
-      this.filteredLetters = this.nomClasse;
+    if (!this.classe.idNiveau) {
+      this.filteredLetters = [...this.nomClasse];
+      return;
     }
+  
+    const classesDuNiveau = this.classes.filter(c => {
+      const niveauId = typeof c.idNiveau === 'object' ? c.idNiveau._id : c.idNiveau;
+      return niveauId === this.classe.idNiveau;
+    });
+  
+    const lettresUtilisées = classesDuNiveau.map(c => c.nom);
+    
+    if (this.id && this.classe.nom) {
+      const index = lettresUtilisées.indexOf(this.classe.nom);
+      if (index > -1) lettresUtilisées.splice(index, 1);
+    }
+  
+    this.filteredLetters = this.nomClasse.filter(letter => 
+      !lettresUtilisées.includes(letter)
+    );
   }
-
   onLetterSelect(event: Event) {
     const selectedLetter = (event.target as HTMLSelectElement).value;
     this.classe.nom = selectedLetter;

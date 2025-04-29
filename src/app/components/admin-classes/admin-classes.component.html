@@ -92,6 +92,7 @@
               <div class="form-group" *ngIf="classe.idNiveau">
                 <label for="select-letter">Nom *</label>
                 <select id="select-letter" required (change)="onLetterSelect($event)">
+
                   <option value="" disabled selected>-- Choisir nom de la classe --</option>
                   <option *ngFor="let l of filteredLetters" [value]="l">{{ l }}</option>
                 </select>

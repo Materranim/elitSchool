@@ -19,9 +19,8 @@ const userSchema = mongoose.Schema({
     refClasses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Classe' }],
     refMatieres: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Matiere' }],
     // IdClasseStudent: { type: mongoose.Schema.Types.ObjectId, ref: 'Classe' }, // Référence à la classe de l'étudiant
-    studentsAssigned: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],  // Ajouter ce champ dans le schéma User
+    // studentsAssigned: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],  // Ajouter ce champ dans le schéma User
 
-    // status: { type: String, default: "pending" }  // champ pour la validation
     status: { 
         type: String, 
         default: function() { return this.role === 'teacher' ? 'pending' : undefined; } 
@@ -29,7 +28,6 @@ const userSchema = mongoose.Schema({
 
 
 }, 
-    // {strict:false} 
     {timestamps:true}
 )
  const user = mongoose.model('User',userSchema )

@@ -31,6 +31,10 @@ import { NiveauxComponent } from './components/niveaux/niveaux.component';
 import { LoginRoleComponent } from './components/login-role/login-role.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { UnauthorizedPageComponent } from './components/unauthorized-page/unauthorized-page.component';
+import { DashboardStudentComponent } from './components/dashboard-student/dashboard-student.component';
+import { DashboardStudentProfComponent } from './components/dashboard-student-prof/dashboard-student-prof.component';
+import { ViewerPipe } from './pipes/viewer.pipe';
+import { CoursEtudiantComponent } from './components/cours-etudiant/cours-etudiant.component';
 
 
 
@@ -59,6 +63,10 @@ import { UnauthorizedPageComponent } from './components/unauthorized-page/unauth
     LoginRoleComponent,
     ContactComponent,
     UnauthorizedPageComponent,
+    DashboardStudentComponent,
+    DashboardStudentProfComponent,
+    ViewerPipe,
+    CoursEtudiantComponent,
     
     
   ],
@@ -72,6 +80,7 @@ import { UnauthorizedPageComponent } from './components/unauthorized-page/unauth
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     SweetAlert2Module.forRoot(),
+
 
   ],
   providers: [],

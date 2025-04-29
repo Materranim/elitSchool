@@ -18,6 +18,18 @@
 						<div class="form-container">
 							<form method="post" (ngSubmit)="addCours()">
 								
+
+<!-- classes -->
+<div class="form-group">
+	<label>Classe *</label>
+	<select class="form-control" [(ngModel)]="cour. idClasse" name="classeId" required>
+	  <option *ngFor="let c of classes" [value]="c._id">
+		{{ c.idNiveau?.name }} {{ c.nom }}
+	  </option>
+	</select>
+  </div>
+ <!--/ classes -->
+
 								<div class="form-group">
 									<label for="matiere">Nom *</label>
 									<input type="text" [(ngModel)]="cour.nom"  name="b" placeholder="Nom" required>

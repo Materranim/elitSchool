@@ -1,24 +1,54 @@
-<div class="container mt-5">
-    <h2 class="mb-4">Liste des cours</h2>
-  
-    <div class="row" *ngFor="let cour of cours">
-      <div class="col-md-12 mb-4">
-        <div class="card shadow">
-          <div class="card-body">
-            <h5 class="card-title">{{ cour.nom }}</h5>
-            <p class="card-text"><strong>Durée :</strong> {{ cour.duree }}</p>
-            <p class="card-text"><strong>Description :</strong> {{ cour.desc }}</p>
-  
-            <div *ngIf="cour.file">
-              <iframe 
-                [src]="'https://docs.google.com/gview?url=' + cour.file + '&embedded=true'" 
-                width="100%" height="500px" frameborder="0">
-              </iframe>
+
+
+
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="main-card">
+                <div class="card-header">
+                    <h2 class="card-title">Liste des Cours</h2>
+                   
+                </div>
+                
+                <div class="table-container">
+                    <table class="cours-table" >
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Durée</th>
+                                <th>Description</th>
+                                <th>cours</th>
+                                <th>TP</th>
+                                <th>Actions</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  *ngFor="let coursItem of cours">
+                                <td> {{ coursItem.nom }}</td>
+                                <td>{{ coursItem.duree }}</td>
+                                <td>{{ coursItem.desc }}</td>
+                                <td><a class="btn btn-primary" [href]="coursItem.file" target="_blank">Voir le Cours</a>
+
+                             </td>
+                                <td>
+                                    <a *ngIf="coursItem.tp" class="btn btn-primary" [href]="coursItem.tp" target="_blank">Voir le TP</a>
+                                    <span *ngIf="!coursItem.tp">Pas de TP</span>
+                                </td>
+
+                                
+                                  
+                                   <td>
+                                  <button class="btn btn-danger"  > Supprimer</button>
+                                  <button class="btn btn-primary" > modifier</button>
+                                </td>
+                            </tr>
+                          
+                           
+                        </tbody>
+                    </table>
+                </div>
+               
+              
             </div>
-  
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  
+

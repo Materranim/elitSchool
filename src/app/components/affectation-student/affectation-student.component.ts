@@ -20,16 +20,28 @@ export class AffectationStudentComponent implements OnInit {
     this.id=this.activateRoute.snapshot.paramMap.get("id")
 this.getStudentByID()
 this. getAllStudent()
-this.getAllClasses()
+// this.getAllClasses()
   }
 
-  getStudentByID(){
-    this.usersService.getStudentByID(this.id).subscribe((res)=>{
-       this.student=res.student
-      //  console.log(this.student);
+  getStudentByID() {
+    this.usersService.getStudentByID(this.id).subscribe((res) => {
+      this.student = res.student;
+  
+      // استخراج اسم classe من الطالب
+      if (this.student.classe) {
+        this.getClassesByNiveau(this.student.classe);
+      }
+    });
+  }
+  
+  
+  // getStudentByID(){
+  //   this.usersService.getStudentByID(this.id).subscribe((res)=>{
+  //      this.student=res.student
+  //     //  console.log(this.student);
        
-     })
-   }
+  //    })
+  //  }
 
    getAllStudent(){
     this.usersService.getAllStudent().subscribe((res)=>{
@@ -39,15 +51,38 @@ this.getAllClasses()
     })
       }
 
+      getClassesByNiveau(niveau: string) {
+        this.classeService.getAllClasses().subscribe((res) => {
+          const normalize = (str: string) =>
+            str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
+      
+          console.log("Nom de niveau de l'étudiant:", normalize(niveau));
+      
+          this.classe = res.data.filter((cl: any) => {
+            const niveauClasse = cl.idNiveau?.name;
+            console.log("Classe:", cl.nom, "| Niveau:", normalize(niveauClasse));
+            return normalize(niveauClasse) === normalize(niveau);
+          });
+      
+          console.log(" Classes selon le niveau:", this.classe);
+        });
+      }
+      
+    
+      
+      
+      
+      
+  
 
-      getAllClasses(){
-        this.classeService.getAllClasses().subscribe((res)=>{
-         this.classe=res.data
-          //  console.log(this.classe);
+      // getAllClasses(){
+      //   this.classeService.getAllClasses().subscribe((res)=>{
+      //    this.classe=res.data
+      //      console.log(this.classe);
            
-          }) 
+      //     }) 
            
-         }
+      //    }
 
   // Méthode pour affecter l'étudiant à la classe
   affecterStudent() {

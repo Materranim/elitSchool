@@ -77,12 +77,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
    
     if (token) {
       const decoded=jwtDecode<CustomJwtPayload>(token);
+      console.log("Token décodé :", decoded); 
+
       if (decoded.user) {
       
         this.connectedUser = decoded.user
       }
     
-      console.log('token',decoded);
+      // console.log('token',decoded);
       // console.log('date exp', decoded.exp);
       // console.log('date iat', decoded.iat);
       }

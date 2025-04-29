@@ -67,7 +67,7 @@ export class UsersService {
                 this.userUrl + '/Student/by-class'
               );
             }
-         
+          
             getAllStudent(){
               return this.httpClient.get<{data:any}>(this.userUrl+'/allStudent')
               }
@@ -88,6 +88,10 @@ export class UsersService {
   deletStudent(id:any){
     return this.httpClient.delete<{message:any}>(`${this.userUrl}/student/${id}`)
            }
-            
+
+
+
+         
+               
 }
  

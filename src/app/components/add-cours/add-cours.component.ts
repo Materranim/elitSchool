@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursService } from 'src/app/services/cours.service';
+import { jwtDecode } from 'jwt-decode';
+import { ClasseService } from 'src/app/services/classe.service';
 
 @Component({
   selector: 'app-add-cours',
@@ -14,24 +16,42 @@ export class AddCoursComponent implements OnInit {
 tpFile: any;
 tpFileName: string = '';
 courFileName: string = '';
-
-  constructor( private courService:CoursService ) { }
+classes: any[] = [];
+  constructor( private courService:CoursService  ,private classeService: ClasseService) { }
 
   ngOnInit(): void { 
+    let token = localStorage.getItem('connectedUser');
+    if (token) {
+      let decodedToken = jwtDecode<any>(token);
+      console.log("Token décodé :", decodedToken); 
+
+      let teacherId = decodedToken?.user?._id;
+  
+      this.classeService.getClassesByTeacher(teacherId).subscribe((res) => {
+        this.classes = res.data;
+        console.log('classe', this.classes);
+        
+      });
+    }
   }
  
 
-
-  addCours(){
-     // récupère l’ID du prof connecté
-    // this.cour.teacherId = localStorage.getItem("userId"); 
+addCours() {
+  // Récupérer le token et décoder l'ID du professeur
+  let token = localStorage.getItem('connectedUser');
+  if (token) {
+    let decodedToken = jwtDecode<any>(token);
+    let teacherId = decodedToken?.user?._id;  // Récupérer l'ID du professeur du token
     
-   
+    // Ajouter l'ID du professeur dans l'objet cours
+    this.cour.teacherId = teacherId;
+    // console.log('id', teacherId);
 
-    this.courService.addCours(this.cour , this.file , this.tpFile).subscribe((result)=>{
-    console.log(result.message); 
-    
-    })
+    // Maintenant, envoyez les données du cours avec l'ID du professeur au backend
+    this.courService.addCours(this.cour, this.file, this.tpFile).subscribe((result) => {
+      console.log(result.message);
+    });
+  }
 }
 
 onTpSelected(event: any) {

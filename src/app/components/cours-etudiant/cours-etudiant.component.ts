@@ -15,29 +15,28 @@ interface CustomJwtPayload extends JwtPayload {
   };
 }
 @Component({
-  selector: 'app-cours',
-  templateUrl: './cours.component.html',
-  styleUrls: ['./cours.component.css']
+  selector: 'app-cours-etudiant',
+  templateUrl: './cours-etudiant.component.html',
+  styleUrls: ['./cours-etudiant.component.css']
 })
-export class CoursComponent implements OnInit {
+export class CoursEtudiantComponent implements OnInit {
   cours: any[] = [];
   connectedUser:any
   constructor( private courService:CoursService) { }
 
   ngOnInit(): void {
-    this.loadConnectedProf();
-
-
+    this.loadConnectedstudent();
   }
- 
-    loadConnectedProf(): void {
+
+
+ loadConnectedstudent(): void {
        const token = localStorage.getItem('connectedUser');
        if (token) {
          const decoded = jwtDecode<CustomJwtPayload>(token);
          if (decoded.user) {
            this.connectedUser = decoded.user;
            console.log('token',decoded);
-           this.getCoursByTeacherId(this.connectedUser._id);
+          //  this.getCoursByTeacherId(this.connectedUser._id);
            
 
          }
@@ -45,9 +44,8 @@ export class CoursComponent implements OnInit {
        }
      }
 
-
-     getCoursByTeacherId(teacherId: string): void {
-      this.courService.getCoursByTeacherId(teacherId).subscribe(
+     getCoursByStudentId(studentId: string): void {
+      this.courService.getCoursByStudentId(studentId).subscribe(
         (response: any) => {
           console.log('Cours récupérés:', response);
           this.cours = response; // adapte ici selon ton backend

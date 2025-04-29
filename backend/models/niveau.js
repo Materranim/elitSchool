@@ -7,8 +7,7 @@ const niveauSchema = mongoose.Schema({
     name:String,
     desc:String,
     matieres:[{type:String, ref:'Matiere'}],
-    // classe:[{type:String, ref:'Classe'}]
-    classe: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Classe' }]  // Utilisation de ObjectId
+    classe: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Classe' }]  //  ObjectId
 
 }, { timestamps: true });
  
