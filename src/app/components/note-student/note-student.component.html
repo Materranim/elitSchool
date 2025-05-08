@@ -1,0 +1,65 @@
+
+<div class="content-body">
+    <div class="container-fluid">
+        <!-- <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Hi, welcome back!</h4>
+                    <span class="ml-1">Tab</span>
+                </div>
+            </div>
+             
+        </div> -->
+
+        <div class="row">
+            <div class="container">
+                <!-- <h1></h1>  -->
+ 
+                <div class="form-container">
+                    <form method="post" (ngSubmit)= "addNote()" >
+                        
+
+                        <!-- <div class="form-group">
+                            <label for="matiere">Matière *</label>
+                            <select name="matiere" class="form-control" [(ngModel)]="selectedMatiereId">
+                              <option *ngFor="let mat of connectedUser.refMatieres" [value]="mat._id">
+                                {{ mat.name }}
+                              </option>
+                            </select>
+                          </div> -->
+                          
+
+                          <div class="form-group">
+                            <label for="matiere">Matière *</label>
+                            <input type="text" class="form-control" [value]="matiereName" readonly>
+                          </div>
+
+                          <div class="form-group"  > 
+                            <label for="matiere"> Orale *</label>
+                            <input type="text"  [(ngModel)]="note.orale" name="b" placeholder="Note" required>
+                        </div>
+
+                        <div class="form-group"  > 
+                            <label for="matiere">Note de contrôle *</label>
+                            <input type="text"  [(ngModel)]="note.noteControle" name="b" placeholder="Note" required>
+                        </div>
+
+                        <div class="form-group"  > 
+                            <label for="matiere">Note de synthèse *</label>
+                            <input type="text"  [(ngModel)]="note.noteSynthese" name="b" placeholder="Note" required>
+                        </div>
+ 
+                        <div class="form-group">
+                            <label for="message">Description </label>
+                            <textarea id="message"  [(ngModel)]="note.desc" name="a" placeholder="Description"></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn"> Ajouter Note </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

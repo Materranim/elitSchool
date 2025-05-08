@@ -1,0 +1,54 @@
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row dashboard-container">
+            <div class="col-lg-12">
+                <div class="row">
+                    <!-- Première Carte - Profil Enseignant -->
+                    <div class="col-md-4">
+                        <div class="card profile-card">
+                            <div class="card-body text-center">
+                                <h3 class="teacher-name">{{ connectedUser.firstName }} {{ connectedUser.lastName }}</h3>
+                                <div class="teacher-info">
+                                    <p><i class="fas fa-envelope"></i> {{ connectedUser.email }}</p>
+                                    <p><i class="fas fa-graduation-cap"></i> {{ connectedUser.specialite }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deuxième Carte - Navigation -->
+                    <div class="col-md-8">
+                        <div class="card info-card-alt">
+                            <div class="card-body">
+                                <!-- Section Accès Rapide -->
+                                <div class="quick-access-section">
+                                    <h4 class="section-title-alt mb-4"><i class="fas fa-tachometer-alt"></i> Tableau de Bord Enseignant</h4>
+                                    <div class="quick-links-alt">
+                                        <a routerLink="/add-cours" class="quick-link-alt">
+                                            <div class="link-icon add-course">
+                                                <i class="fas fa-plus-circle"></i>
+                                            </div>
+                                            <span>Ajouter un Cours</span>
+                                        </a>
+                                        <a routerLink="/profStudent" class="quick-link-alt">
+                                            <div class="link-icon students">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                            <span>Voir les Étudiants</span>
+                                        </a>
+                                        <a routerLink="/cours" class="quick-link-alt">
+                                            <div class="link-icon courses">
+                                                <i class="fas fa-book-open"></i>
+                                            </div>
+                                            <span>Voir les Cours</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

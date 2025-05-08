@@ -12,7 +12,7 @@ export class AddCoursComponent implements OnInit {
   cour:any ={}
   file:any 
   filePreview:any
-  hasTP: boolean = false;
+  hasTP: boolean = false; 
 tpFile: any;
 tpFileName: string = '';
 courFileName: string = '';

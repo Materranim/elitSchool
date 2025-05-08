@@ -17,6 +17,9 @@ const Classe = require('./models/classe')
 const Matiere = require('./models/matiere')
 const Cour = require('./models/cours');
 const Niveau = require('./models/niveau');
+const Note = require('./models/note');
+const Reclamation = require('./models/reclamation');
+const Emploi = require('./models/emploi');
 
 
 
@@ -724,6 +727,29 @@ app.get('/cours/teacher/:teacherId', async (req, res) => {
   }
 });
 
+
+app.post('/cours/by-ids', (req, res) => {
+  const { ids } = req.body;
+ Cour.find({ '_id': { $in: ids } })
+    .then(courses => {
+      res.json({ courses });
+    })
+    .catch(error => {
+      res.status(500).json({ error: 'Erreur lors de la récupération des cours' });
+    });
+});
+
+app.delete('/cours/:id', (req, res) => { 
+ 
+  const id = req.params.id
+  Cour.deleteOne({ _id: id }).then(() => {
+      res.status(200).json({ message: 'cours deleted' })
+  })
+
+})
+
+
+
 app.get('/classes/teacher/:teacherId', async (req, res) => {
   try {
     const teacherId = req.params.teacherId;
@@ -747,6 +773,7 @@ app.get('/classes/teacher/:teacherId', async (req, res) => {
 //     res.status(500).json({ message: err.message });
 //   }
 // });
+
 
 app.post('/niveau', (req, res) => {
   const data = new Niveau({
@@ -782,7 +809,7 @@ app.post('/matieres', (req, res) => {
   data.save((err, doc) => {
       if (err) {
           console.log(err);
-
+ 
       } else {
         Niveau.findOne({ _id: req.body.idNiveau }).then((findedNiveau) => {
               if (findedNiveau) {
@@ -838,6 +865,246 @@ app.get('/nomClasse', async (req, res) => {
 
 
 
+app.post('/note', (req, res) => {
+  // Créer une nouvelle note à partir des données reçues dans le corps de la requête
+  const data = new Note({
+    noteControle: req.body.noteControle,        
+    noteSynthese: req.body.noteSynthese, 
+    orale:req.body.orale,       
+    desc: req.body.desc,        
+    matieresId: req.body.matieresId,  
+    studentId: req.body.studentId,   
+    teacherId: req.body.teacherId 
 
+  });
+
+  // Sauvegarder la note dans la base de données
+  data.save()
+    .then(savedNote => {
+      // Une fois la note enregistrée, ajouter l'ID de la note dans le tableau "notes" de l'étudiant
+      User.findByIdAndUpdate(
+        req.body.studentId, // L'ID de l'étudiant
+        { $push: { notes: savedNote._id } }, // Ajouter l'ID de la note au tableau "notes"
+        { new: true } // Option pour récupérer l'utilisateur mis à jour
+      )
+        .then(updatedUser => {
+          // Retourner une réponse avec un message de succès
+          res.status(200).json({ message: 'Note Added and User updated', updatedUser });
+        })
+        .catch(err => {
+          res.status(500).json({ message: 'Error updating user notes', error: err });
+        });
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Error adding note', error: err });
+    });
+});
+
+
+app.get('/note', (req, res) => {
+
+  Note.find().then((docs) => {
+      res.status(200).json({ note: docs })
+  })
+
+})
+
+
+
+
+//  récupérer toutes les notes d'un étudiant avec les infos de la matière
+app.get('/note/student/:id', async (req, res) => {
+  try {
+    const studentId = req.params.id;
+
+    const notes = await Note.find({ studentId })
+      .populate('matieresId') // pour récupérer les infos de la matière
+      .exec();
+
+    res.status(200).json(notes);
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur serveur', error });
+  }
+});
+
+
+
+// Obtenir l'enfant via le numéro du parent
+app.get('/api/child/:parentPhone', async (req, res) => {
+  try {
+    const parentPhone = req.params.parentPhone;
+
+    // Chercher le parent par téléphone
+    const parent = await User.findOne({ phone: parentPhone, role: 'parent' });
+    if (!parent) {
+      return res.status(404).json({ message: "Parent non trouvé." });
+    }
+
+    // Chercher l'étudiant (enfant) par le numéro stocké dans phoneEnfant
+    const student = await User.findOne({ phone: parent.phoneEnfant, role: 'student' })
+    .populate({
+      path: 'refClasses',
+      populate: [
+        {
+          path: 'idNiveau',
+          model: 'Niveau',
+          populate: {
+            path: 'idEmploi', 
+            model: 'Emploi'
+          }
+        }
+      ]
+    })
+    .populate({
+      path: 'notes',
+      populate: {
+        path: 'matieresId',
+        model: 'Matiere' // adapte ce nom selon ton modèle exact
+      }
+    });
+  
+    if (!student) {
+      return res.status(404).json({ message: "Enfant non trouvé." });
+    }
+
+    res.status(200).json({ student });
+  } catch (error) {
+    console.error("Erreur lors de la récupération de l'enfant :", error);
+    res.status(500).json({ message: "Erreur serveur." });
+  }
+});
+
+
+app.post('/reclamation', (req, res) => {
+  const data = new Reclamation({
+ 
+    nom: req.body.nom,
+    email: req.body.email,
+    telephone: req.body.telephone,
+    NomEleve: req.body.NomEleve,
+    sujetReclamation: req.body.sujetReclamation,
+    detailsReclamation: req.body.detailsReclamation,
+   })
+ data.save().then(() => {
+     res.status(200).json({ message: 'reclamation Added' })
+ })
+})
+
+app.get('/reclamation', (req, res) => {
+
+  Reclamation.find().then((docs) => {
+      res.status(200).json({ data: docs })
+  })
+
+})
+
+
+
+
+app.use('/images', express.static(path.join('backend/images')));
+
+// Ta config Multer
+const MIME_TYPEEmlpoi = {
+  "image/png": "png",
+  "image/jpeg": "jpg",
+  "image/jpg": "jpg",
+  "application/pdf": "pdf",
+};
+const storageEmploi = multer.diskStorage({
+  destination: (req, file, cb) => {
+      const isValid = MIME_TYPEEmlpoi[file.mimetype];
+      let error = new Error("Mime type is invalid");
+      if (isValid) {
+          error = null;
+      }
+      cb(null, 'backend/images'); 
+  },
+  filename: (req, file, cb) => {
+      const name = file.originalname.toLowerCase().split(' ').join('-');
+      const extension = MIME_TYPEEmlpoi[file.mimetype];
+      const imgName = name + '-' + Date.now() + '-Elite-' + '.' + extension;
+      cb(null, imgName);
+  }
+});
+// app.post('/emploi', multer({ storage: storageEmploi }).fields([
+//   { name: 'emploi', maxCount: 1 },
+// ]), async (req, res) => {
+//   try {
+//     let url = req.protocol + '://' + req.get('host');
+
+//     let file = req.files['emploi'] ? url + '/images/' + req.files['emploi'][0].filename : '';
+
+//     const data = new Emploi({
+//       annee: req.body.annee,
+//       Commentaire: req.body.Commentaire,
+//       idNiveau: req.body.idNiveau,
+//       emploi: file,
+//     });
+
+//     await data.save();
+//     res.status(200).json({ message: 'Emploi Added' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Erreur lors de l\'ajout de l\'emploi', error });
+//   }
+// });
+
+app.post('/emploi', multer({ storage: storageEmploi }).fields([
+  { name: 'emploi', maxCount: 1 },
+]), async (req, res) => {
+  try {
+    let url = req.protocol + '://' + req.get('host');
+    let file = req.files['emploi'] ? url + '/images/' + req.files['emploi'][0].filename : '';
+
+    const data = new Emploi({
+      annee: req.body.annee,
+      Commentaire: req.body.Commentaire,
+      idNiveau: req.body.idNiveau,
+      emploi: file,
+    });
+
+    const savedEmploi = await data.save();
+
+    //  Mise à jour du niveau avec idEmploi
+    await Niveau.findByIdAndUpdate(
+      req.body.idNiveau,
+      { idEmploi: savedEmploi._id },
+      { new: true }
+    );
+
+    res.status(200).json({ message: 'Emploi Added & Niveau updated', emploi: savedEmploi });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erreur lors de l\'ajout de l\'emploi', error });
+  }
+});
+
+
+
+// Route pour récupérer l'emploi du temps du niveau
+app.get('/emploi/niveau/:idNiveau/emploi', async (req, res) => {
+  try {
+    const niveau = await Niveau.findById(req.params.idNiveau).populate('idEmploi');
+    if (!niveau) {
+      return res.status(404).json({ message: 'Niveau non trouvé' });
+    }
+    res.json({ emploi: niveau.idEmploi });
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur serveur' });
+  }
+});
+
+
+
+// PUT /reclamation/:id
+app.put('/reclamation/reclamation/:id', async (req, res) => {
+  const { etat, description } = req.body;
+  try {
+    await Reclamation.findByIdAndUpdate(req.params.id, { etat, description });
+    res.json({ message: "Reclamation mise à jour" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 module.exports = app // make app exportable 

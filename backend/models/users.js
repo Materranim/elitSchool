@@ -20,6 +20,7 @@ const userSchema = mongoose.Schema({
     refMatieres: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Matiere' }],
     // IdClasseStudent: { type: mongoose.Schema.Types.ObjectId, ref: 'Classe' }, // Référence à la classe de l'étudiant
     // studentsAssigned: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],  // Ajouter ce champ dans le schéma User
+    notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Note' }], // Référence aux notes
 
     status: { 
         type: String, 

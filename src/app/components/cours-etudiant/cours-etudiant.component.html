@@ -18,22 +18,21 @@
                             <th>Description</th>
                             <th>cours</th>
                             <th>TP</th>
-                            <th>Actions</th> 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr >
-                            <td> </td>
-                            <td></td>
-                            <td></td>
-                            <td><a class="btn btn-primary" [href]="" target="_blank">Voir le Cours</a>
-
-                         </td>
+                        <tr  *ngFor="let c of courses">
+                            <td> {{ c.nom }}</td>
+                            <td> {{ c.duree }}</td>
+                            <td> {{ c.desc }}</td>
                             <td>
-                                <a  class="btn btn-primary" [href]="" target="_blank">Voir le TP</a>
-                                <!-- <span >Pas de TP</span> -->
+                                <a class="btn btn-primary" [href]="c.file" target="_blank">Voir le Cours</a>
                             </td>
-
+                            
+                                <td>
+                                    <a *ngIf="c.tp" class="btn btn-primary" [href]="c.tp" target="_blank">Voir le TP</a>
+                                    <span *ngIf="!c.tp">Pas de TP</span>
+                                </td>
                             
                               
                              

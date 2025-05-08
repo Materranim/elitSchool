@@ -1,0 +1,106 @@
+
+<div class="content-body">
+    <div class="container-fluid">
+            
+        <!-- <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>All Professors</h4>
+                </div>
+            </div>
+            <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0);">Professors</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0);">All Professors</a></li>
+                </ol>
+            </div>
+        </div> -->
+        
+        <div class="row">
+        <div class="col-lg-12">
+                <div class="row tab-content">
+                    <div id="list-view" class="tab-pane fade active show co l-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table id="example3" class="display" style="min-width: 845px">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom complet</th>
+                                                <th>Adresse email</th>
+                                                <th>Numéro de téléphone</th>
+                                                <th>Nom de l'élève concerné</th>
+                                                <th>Sujet de la réclamation</th>
+                                                <th>Détails de la réclamation</th>
+                                                <th>État</th>
+
+                                                <th>Action</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let r of reclamation" >
+                                                <td>{{r.nom}}</td>
+                                                <td>{{r.email}}</td>
+                                                <td>{{r.telephone}}</td>
+                                                <td>{{r.NomEleve}}</td>
+                                                <td>{{r.sujetReclamation}}</td>
+                                                <td>{{r.detailsReclamation}}</td>
+                                                <td>
+                                                    <span [ngClass]="{'text-success': r.etat === 'Traité', 'text-danger': r.etat !== 'Traité'}">
+                                                      {{ r.etat || 'Non traité' }}
+                                                    </span>
+                                                  </td>
+                                                  
+                                                  <button class="btn btn-primary" (click)="openModal(r)">Traiter</button>
+
+
+                                                <td>
+                                                 
+<!--                                                
+                                                <button class="btn btn-danger"  (click)="deletProfessor(p._id)"> Supprimer</button>
+                                                <button class="btn btn-affecter" (click)="goToAffectationPage(p._id)"> Affecter</button> -->
+                                                </td>												
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table> 
+                                    <div *ngIf="selectedReclamation" class="card mt-4 p-3 border">
+                                        <h5>Traiter la réclamation de {{selectedReclamation.nom}}</h5>
+                                        
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="etat" id="traite" value="Traité"
+                                                 (change)="etatChoisi='Traité'">
+                                          <label class="form-check-label" for="traite">Traité</label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="etat" id="nonTraite" value="Non traité"
+                                                 (change)="etatChoisi='Non traité'">
+                                          <label class="form-check-label" for="nonTraite">Non traité</label>
+                                        </div>
+                                      
+                                        <div *ngIf="etatChoisi" class="mt-2">
+                                          <label for="description">Description :</label>
+                                          <input type="text" id="description" class="form-control" [(ngModel)]="descriptionTraitement">
+                                        </div>
+                                      
+                                        <button class="btn btn-success mt-2" (click)="submitTraitement()">Confirmer</button>
+                                        <button class="btn btn-secondary mt-2 ms-2" (click)="cancel()">Annuler</button>
+                                      </div>
+                                      
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+

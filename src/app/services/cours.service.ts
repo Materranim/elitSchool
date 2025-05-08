@@ -15,7 +15,7 @@ export class CoursService {
     formData.append('duree' , data.duree)
     formData.append('nom' , data.nom)
     formData.append('desc', data.desc)
-    formData.append('teacherId', data.teacherId); // si tu as stocké l'ID du user connecté
+    formData.append('teacherId', data.teacherId); 
     formData.append('idClasse', data.idClasse);
     if (tpFile) {
       formData.append('tp', tpFile);
@@ -30,13 +30,15 @@ export class CoursService {
     return this.httpClient.get(`${this.coursUrl}/teacher/${teacherId}`);
   }
   
-    // Récupérer les cours par TeacherId
-    getCoursByStudentId(studentId: string) {
-      return this.httpClient.get(`${this.coursUrl}/student/${studentId}`);
-    }
- 
+  getCoursByStudent(idCours: string[]) {
+    // Appel de l'API pour récupérer les cours par les ids donnés
+    return this.httpClient.post<any>(`${this.coursUrl}/by-ids`, { ids: idCours });
+  }
+  
 
-   
+  deletCour(id:any){
+    return this.httpClient.delete<{message:any}>(`${this.coursUrl}/${id}`)
+   }
 
      
 }

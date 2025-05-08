@@ -58,10 +58,7 @@ export class UsersService {
             deletProfessor(id:any){
      return this.httpClient.delete<{message:any}>(`${this.userUrl}/Professor/${id}`)
             }
-            
-            // getAllStudent(){
-            //   return this.httpClient.get<{data:any}>(this.userUrl+'/Student')
-            //   }
+           
             getStudentsByClass() {
               return this.httpClient.get<{ students7: any[], students8: any[], students9: any[] }>(
                 this.userUrl + '/Student/by-class'
@@ -89,6 +86,10 @@ export class UsersService {
     return this.httpClient.delete<{message:any}>(`${this.userUrl}/student/${id}`)
            }
 
+// Récupérer les infos de l'enfant via le téléphone du parent
+getEnfantByParentPhone(parentPhone: string) {
+  return this.httpClient.get<{ student: any }>(`${this.userUrl}/child/${parentPhone}`);
+}
 
 
          

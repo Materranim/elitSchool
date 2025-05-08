@@ -1,0 +1,60 @@
+
+    
+
+   
+
+
+
+
+
+    
+    <div class="content-body">
+        <div class="container-fluid">
+            <!-- <div class="row page-titles mx-0">
+                <div class="col-sm-6 p-md-0">
+                    <div class="welcome-text">
+                        <h4>Hi, welcome back!</h4>
+                        <span class="ml-1">Tab</span>
+                    </div>
+                </div>
+                 
+            </div> -->
+    
+            <div class="row">
+                <div class="container">
+                    <h1><i class="fas fa-calendar-alt"></i> Emploi du Temps</h1>
+                    <p>Visualisation de votre emploi du temps</p>
+               
+                
+                <div class="info-section">
+                  
+                    
+                    <div class="info-card">
+                        <h3><i class="fas fa-calendar-day"></i> Année Scolaire</h3>
+                        <p>2024-2025</p>
+                        <p>Semestre 1</p>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="schedule-section">
+                    <h2 class="schedule-title">
+                      <i class="fas fa-calendar-week"></i> Votre Emploi du Temps
+                    </h2>
+                  
+                    <div *ngIf="emploiImageUrl; else noEmploi">
+                      <h4>Emploi du temps</h4>
+                      <img [src]="emploiImageUrl" alt="emploi du temps" style="max-width: 100%;">
+                    </div>
+                  
+                    <ng-template #noEmploi>
+                      <p>Aucun emploi du temps disponible.</p>
+                    </ng-template>
+                  </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    

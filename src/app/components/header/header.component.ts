@@ -77,7 +77,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
    
     if (token) {
       const decoded=jwtDecode<CustomJwtPayload>(token);
-      console.log("Token décodé :", decoded); 
+      // console.log("Token décodé :", decoded); 
 
       if (decoded.user) {
       

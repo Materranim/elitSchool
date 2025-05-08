@@ -27,7 +27,6 @@ this. getAllStudent()
     this.usersService.getStudentByID(this.id).subscribe((res) => {
       this.student = res.student;
   
-      // استخراج اسم classe من الطالب
       if (this.student.classe) {
         this.getClassesByNiveau(this.student.classe);
       }

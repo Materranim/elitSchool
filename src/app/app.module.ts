@@ -35,6 +35,17 @@ import { DashboardStudentComponent } from './components/dashboard-student/dashbo
 import { DashboardStudentProfComponent } from './components/dashboard-student-prof/dashboard-student-prof.component';
 import { ViewerPipe } from './pipes/viewer.pipe';
 import { CoursEtudiantComponent } from './components/cours-etudiant/cours-etudiant.component';
+import { DashboardProfComponent } from './components/dashboard-prof/dashboard-prof.component';
+import { ProfStudentComponent } from './components/prof-student/prof-student.component';
+import { NoteStudentComponent } from './components/note-student/note-student.component';
+import { NotesComponent } from './components/notes/notes.component';
+import { DashboardParentComponent } from './components/dashboard-parent/dashboard-parent.component';
+import { NoteParentComponent } from './components/note-parent/note-parent.component';
+import { ReclamationParentComponent } from './components/reclamation-parent/reclamation-parent.component';
+import { TabReclamationComponent } from './components/tab-reclamation/tab-reclamation.component';
+import { AddEmploiComponent } from './components/add-emploi/add-emploi.component';
+import { EmploiStudentComponent } from './components/emploi-student/emploi-student.component';
+import { EmploiParentComponent } from './components/emploi-parent/emploi-parent.component';
 
 
 
@@ -67,6 +78,17 @@ import { CoursEtudiantComponent } from './components/cours-etudiant/cours-etudia
     DashboardStudentProfComponent,
     ViewerPipe,
     CoursEtudiantComponent,
+    DashboardProfComponent,
+    ProfStudentComponent,
+    NoteStudentComponent,
+    NotesComponent,
+    DashboardParentComponent,
+    NoteParentComponent,
+    ReclamationParentComponent,
+    TabReclamationComponent,
+    AddEmploiComponent,
+    EmploiStudentComponent,
+    EmploiParentComponent,
     
     
   ],

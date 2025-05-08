@@ -34,11 +34,12 @@
                                     <span *ngIf="!coursItem.tp">Pas de TP</span>
                                 </td>
 
-                                
+                                 
                                   
                                    <td>
-                                  <button class="btn btn-danger"  > Supprimer</button>
                                   <button class="btn btn-primary" > modifier</button>
+                                  <button class="btn btn-danger"  (click)="deletCours(coursItem._id)"> Supprimer</button>
+
                                 </td>
                             </tr>
                           

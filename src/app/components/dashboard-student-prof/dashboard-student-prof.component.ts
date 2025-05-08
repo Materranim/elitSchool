@@ -40,7 +40,7 @@ export class DashboardStudentProfComponent implements OnInit {
           this.getProfessorsByClass(decoded.user.refClasses);
 
         }
-  
+    
       }
     }
 

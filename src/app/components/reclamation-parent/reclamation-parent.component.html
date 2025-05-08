@@ -1,0 +1,60 @@
+ 
+   
+    
+            <div class="row">
+                <div class="container">
+                 
+                    
+                    <form class="reclamation-form" action="#" method="post" (ngSubmit)="addReclamation()">
+                        <h3>Formulaire de Réclamation :</h3>
+
+                        
+                        <div class="form-group">
+                            <label for="nom">Nom complet *</label>
+                            <input type="text" id="nom" [(ngModel)]="reclamation.nom" class="form-control" name="nom" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Adresse email *</label>
+                            <input type="email" id="email" [(ngModel)]="reclamation.email" class="form-control" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telephone">Numéro de téléphone *</label>
+                            <input type="tel" id="telephone" [(ngModel)]="reclamation.telephone" class="form-control" name="telephone">
+                        </div>
+                        
+                     
+                        
+                        <div class="form-group">
+                            <label for="eleve">Nom de l'élève concerné *</label>
+                            <input type="text" id="eleve" class="form-control" [(ngModel)]="reclamation.NomEleve" name="eleve" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sujet">Sujet de la réclamation *</label>
+                            <select id="sujet" class="form-control"  [(ngModel)]="reclamation.sujetReclamation" name="sujet" required>
+                                <option value="">-- Sélectionnez --</option>
+                                <option value="notes">Problème avec les notes</option>
+                                <option value="cours">Problème avec les cours</option>
+                                <option value="comportement">Problème de comportement</option>
+                                <option value="administration">Problème administratif</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Détails de la réclamation *</label>
+                            <textarea id="message" class="form-control" [(ngModel)]="reclamation.detailsReclamation" name="message" required></textarea>
+                        </div>
+                        
+                      
+                        
+                        <button type="submit" class="btn-submit">Envoyer la réclamation</button>
+                    </form>
+                    
+                   
+                </div>
+            </div>
+     
+     

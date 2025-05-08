@@ -1,0 +1,191 @@
+/* Style général pour l'accordéon */
+.accordion {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Style pour les boutons de l'accordéon */
+.accordion-button {
+    background-color: #4b5ff1;
+    color: white;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #3a4bd9;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+/* Style pour le corps de l'accordéon */
+.accordion-body {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}
+
+/* Style pour le tableau */
+.table {
+    width: 100%;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    border-collapse: collapse;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.table thead th {
+    background-color: #f1f3f9;
+    color: #333;
+    font-weight: 600;
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.table tbody td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #e0e0e0;
+    word-wrap: break-word;
+}
+
+/* Répartition des largeurs de colonnes */
+.table thead th:nth-child(1),
+.table tbody td:nth-child(1) {
+    width: 20%; /* Nom */
+}
+
+.table thead th:nth-child(2),
+.table tbody td:nth-child(2) {
+    width: 25%; /* Email */
+}
+
+.table thead th:nth-child(3),
+.table tbody td:nth-child(3) {
+    width: 20%; /* Affecter Note */
+}
+
+.table thead th:nth-child(4),
+.table tbody td:nth-child(4),
+.table thead th:nth-child(5),
+.table tbody td:nth-child(5),
+.table thead th:nth-child(6),
+.table tbody td:nth-child(6) {
+    width: 10%; /* Orale, noteControle, noteSynthese */
+    text-align: center;
+}
+
+/* Style pour les cellules des notes */
+.table tbody td:nth-child(4),
+.table tbody td:nth-child(5),
+.table tbody td:nth-child(6) {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Style pour le bouton Affecter Note */
+.btn-affecter {
+    background-color: #4b5ff1;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 120px;
+    white-space: nowrap;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-affecter:hover {
+    background-color: #3a4bd9;
+}
+
+/* Style pour le dropdown */
+.dropdown-menu {
+    min-width: 200px;
+    padding: 0.5rem 0;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f3f9;
+    color: #4b5ff1;
+}
+
+/* Style pour le conteneur principal */
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 15px;
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table thead th:nth-child(1),
+    .table tbody td:nth-child(1),
+    .table thead th:nth-child(2),
+    .table tbody td:nth-child(2),
+    .table thead th:nth-child(3),
+    .table tbody td:nth-child(3),
+    .table thead th:nth-child(4),
+    .table tbody td:nth-child(4),
+    .table thead th:nth-child(5),
+    .table tbody td:nth-child(5),
+    .table thead th:nth-child(6),
+    .table tbody td:nth-child(6) {
+        width: auto;
+        display: block;
+        text-align: left;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+    }
+
+    .table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: none;
+    }
+
+    .table tbody td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+}

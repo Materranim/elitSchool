@@ -1,0 +1,55 @@
+
+<div class="content-body">
+    <div class="container-fluid">
+        <!-- <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+                <div class="welcome-text">
+                    <h4>Hi, welcome back!</h4>
+                    <span class="ml-1">Tab</span>
+                </div>
+            </div>
+             
+        </div> -->
+
+        <div class="row">
+            <div class="container">
+                <h1>Gestion de l'Emploi du Temps</h1>
+
+                <form  method="post" (ngSubmit)="addemploi()">
+
+                    <div class="form-group">
+                        <label for="annee" class="required">Année scolaire *</label>
+                        <input type="" id="texte" name="annee" [(ngModel)]="data.annee" required placeholder="2024-2025" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="classes">Niveau *</label>
+                        <select id="classes" name="a"  required  [(ngModel)]="data. idNiveau" >
+                            <option *ngFor="let n of niveau" [value]="n._id">
+                                {{ n.name }}
+                            </option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="commentaires">Commentaire</label>
+                        <textarea id="commentaires" name="commentaires" [(ngModel)]="data. Commentaire" placeholder="Notes ou informations supplémentaires..."></textarea>
+                    </div>
+                    <button type="button" (click)='filePicker.click()' class="btn btn-primary">
+                        Sélectionner emploi</button>
+                        
+                        <div class="form-group" >
+                        <input style="visibility: hidden;" type="file" class="form-control"
+                        #filePicker (change)='onImageSelected($event)' />
+                        </div>
+                        <img [src]="imagePreview">
+                  
+                   
+
+                    <button type="submit" class="submit-btn">Enregistrer</button>
+                </form>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>

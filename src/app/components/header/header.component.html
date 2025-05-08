@@ -94,9 +94,18 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a routerLink="/dashboard-student">Dashboard </a></li>
-                  
+
                 </ul>
             </li>
+            <li  *ngIf="isLogged() && connectedUser.role== 'teacher' "><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <i class="la la-home"></i>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a routerLink="/dashboard-prof">Dashboard </a></li>
+
+            </ul>
+        </li>
             
             <li *ngIf="isLogged() && connectedUser.role== 'student' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
                 <i class="la la-user"></i>
@@ -106,6 +115,16 @@
                 <li><a routerLink="/dashboard-studentProf">Liste Enseignants </a></li>
 
             </ul>
+
+            <li  *ngIf="isLogged() && connectedUser.role== 'parent' "><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <i class="la la-home"></i>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a routerLink="/dashboard-parent">Dashboard </a></li>
+
+            </ul>
+        
         </li>
             
             
@@ -156,6 +175,16 @@
             </ul>
         </li>
 
+
+             <!-- Nouveau Menu Matières -->
+             <li *ngIf="isLogged() && connectedUser.role== 'admin' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                <i class="la la-book"></i> <!-- Icône de livre pour les matières -->
+                <span class="nav-text">Reclamation</span>
+            </a>
+            <ul aria-expanded="false">
+                <li><a routerLink="/reclamation-admin"> Reclamation</a></li>
+            </ul>
+        </li>
 
         <li *ngIf="isLogged() && connectedUser.role== 'admin' " ><a class="has-arrow" href="javascript:void()" aria-expanded="false">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
